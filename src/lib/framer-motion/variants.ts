@@ -1,5 +1,12 @@
 import type { AnimationProps, VariantLabels, Transition } from "framer-motion"
 
+interface ViewportOptions {
+	root?: React.RefObject<Element>
+	once?: boolean
+	margin?: string
+	amount?: "some" | "all" | number
+}
+
 export const ease = [0.6, 0.01, 0.01, 0.95]
 
 export const variantPresets: Record<string, VariantLabels> = {
@@ -10,11 +17,14 @@ export const variantPresets: Record<string, VariantLabels> = {
 
 export const transition: Transition = { ease, duration: 1 }
 
-export const basicStagger = (t?: Transition): AnimationProps => ({
+export const viewport: ViewportOptions = { once: true, margin: "-100px" }
+
+export const basicStagger = (t?: Transition): AnimationProps & { viewport: ViewportOptions } => ({
 	...variantPresets,
 	variants: {
 		animate: { transition: { staggerChildren: 0.015, delay: 0.01, ...transition, ...t } },
 	},
+	viewport,
 })
 export const slideBtm = (t?: Transition): AnimationProps => ({
 	variants: {

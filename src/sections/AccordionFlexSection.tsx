@@ -4,7 +4,8 @@ import type { ImageProps } from "next/image"
 import { createRef, useCallback, useMemo } from "react"
 import { v4 as newId } from "uuid"
 
-import { Accordion, FlexCard } from "@/comps"
+import { Accordion } from "@/comps/Accordion"
+import { FlexCard } from "@/comps/FlexCard"
 import { slideLeftUp, slideRightUp } from "@/lib/framer-motion/variants"
 import type { FlexDirection } from "@/types"
 
@@ -14,7 +15,7 @@ export interface AccordionFlexSectionData {
 	flexDirection?: FlexDirection
 }
 
-export const AccordionFlexSection = ({ content, flexDirection = "flex-row", imgProps }: AccordionFlexSectionData) => {
+export function AccordionFlexSection({ content, flexDirection = "flex-row", imgProps }: AccordionFlexSectionData) {
 	const refs = useMemo(() => {
 		return (
 			content.map(() => {
@@ -56,7 +57,7 @@ export const AccordionFlexSection = ({ content, flexDirection = "flex-row", imgP
 
 	return (
 		<FlexCard imgProps={imgProps} flexDirection={flexDirection}>
-			<div className='flex w-full max-w-full flex-col sm:max-w-[80%] md:max-w-[60%] lg:max-w-[45%]'>
+			<div className='flex w-full max-w-full flex-col xs:max-w-[80%] md:max-w-[60%] lg:max-w-[45%]'>
 				{content?.map(({ content, label }, idx) => (
 					<Accordion
 						defaultOpen={idx === 0}

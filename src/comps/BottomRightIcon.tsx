@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useWindowSize } from "usehooks-ts"
 
-import { useWindowScroll } from "@/hooks"
+import { useWindowScroll } from "@/hooks/useWindowScroll"
 
 import { Button } from "./Button"
 import { MotionElement } from "./MotionElement"
 
 import IonIosArrowUp from "~icons/ion/ios-arrow-up"
 
-export const BottomRightIcon = () => {
+export function BottomRightIcon() {
 	const { height: viewportHeight, width } = useWindowSize()
 
 	const [scroll, scrollToTop] = useWindowScroll()

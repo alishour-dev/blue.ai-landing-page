@@ -1,6 +1,6 @@
 "use client"
 
-import { MotionProps, m } from "framer-motion"
+import { m, type MotionProps } from "framer-motion"
 import { forwardRef, useMemo } from "react"
 
 export type MotionElementProps<T extends keyof JSX.IntrinsicElements> = {

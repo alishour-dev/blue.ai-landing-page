@@ -1,9 +1,9 @@
-// import type { NextSeoProps } from "next-seo"
+import type { Metadata } from "next"
 
 import { PATHS } from "@/constants"
-import type { SectionProps, SectionType } from "@/layouts"
 import type { FooterProps } from "@/layouts/appLayout/footer"
 import type { NavbarProps } from "@/layouts/appLayout/navbar"
+import type { SectionProps, SectionType } from "@/layouts/section"
 
 import * as aida from "./images/caseStudy/aida"
 import * as Estafeta from "./images/caseStudy/estafeta"
@@ -29,6 +29,7 @@ import * as LogisticsImgs from "./images/industries/logistics"
 import * as RealEstateImgs from "./images/industries/realEstate"
 import * as SalesImgs from "./images/industries/sales"
 import logo from "./images/logo.png"
+import * as MetaImages from "./images/metadata"
 import * as AdaptiveNlpImgs from "./images/products/adaptiveNlp"
 import * as ApiImages from "./images/products/api"
 import * as BillingImgs from "./images/products/billingSystem"
@@ -49,7 +50,13 @@ import * as UnifiedPlatformImgs from "./images/unifiedPlatform"
 const BLUE_BG = "bg-[#F0FBFF]"
 const ROW_REVERSE = "flex-row-reverse"
 
-export const globalData: { headerData: NavbarProps; footerData: FooterProps } = {
+export interface GlobalDataProps {
+	headerData: NavbarProps
+	footerData: FooterProps
+	defaultMetaData: Metadata
+}
+
+export const globalData: GlobalDataProps = {
 	headerData: {
 		mainMenu: [
 			{
@@ -58,67 +65,67 @@ export const globalData: { headerData: NavbarProps; footerData: FooterProps } = 
 					{
 						label: "Campaign Management System",
 						subLabel: "Optimize your marketing campaigns with great ROI",
-						href: PATHS.PRODUCTS.CAMPAIGN_MANAGEMENT_SYSTEM,
+						href: PATHS.PRODUCTS_CAMPAIGN_MANAGEMENT_SYSTEM,
 						icon: "IcRoundCampaign",
 					},
 					{
 						label: "Flow builder",
 						subLabel: "Pack your interaction channels into a single management system",
-						href: PATHS.PRODUCTS.FLOW_BUILDER,
+						href: PATHS.PRODUCTS_FLOW_BUILDER,
 						icon: "RiGitMergeFill",
 					},
 					{
 						label: "Adaptive NLP",
 						subLabel: "Futuristic Neural Language processing for an advanced future",
-						href: PATHS.PRODUCTS.ADAPTIVE_NLP,
+						href: PATHS.PRODUCTS_ADAPTIVE_NLP,
 						icon: "IonHardwareChip",
 					},
 					{
 						label: "API's",
 						subLabel: "A set of integration-ready APIs for your business needs",
-						href: PATHS.PRODUCTS.API,
+						href: PATHS.PRODUCTS_API,
 						icon: "IonChatbubblesSharp",
 					},
 					{
 						label: "Insight Engine",
 						subLabel: "Boost your reporting techniques with our insights engine.",
-						href: PATHS.PRODUCTS.INSIGHT_ENGINE,
+						href: PATHS.PRODUCTS_INSIGHT_ENGINE,
 						icon: "AntDesignDashboardFilled",
 					},
 					{
 						label: "Livechat (widget)",
 						subLabel: "Keep in touch with your clients and stay up-to-date!",
-						href: PATHS.PRODUCTS.LIVECHAT,
+						href: PATHS.PRODUCTS_LIVECHAT,
 						icon: "IcRoundMarkChatUnread",
 					},
 					{
 						label: "CRM",
 						subLabel: "Advanced Customer Relationship management tool",
-						href: PATHS.PRODUCTS.CRM,
+						href: PATHS.PRODUCTS_CRM,
 						icon: "FaSolidHandshake",
 					},
 					{
 						label: "Payment Gateway",
 						subLabel: "Integrate any payment method on your applications",
-						href: PATHS.PRODUCTS.PAYMENT_GATEWAY,
+						href: PATHS.PRODUCTS_PAYMENT_GATEWAY,
 						icon: "BiCreditCard2BackFill",
 					},
 					{
 						label: "Blue.ai Integrations",
 						subLabel: "Set of tools and utility functions for you business",
-						href: PATHS.PRODUCTS.INTEGRATIONS,
+						href: PATHS.PRODUCTS_INTEGRATIONS,
 						icon: "BiFileEarmarkCodeFill",
 					},
 					{
 						label: "Ticketing System",
 						subLabel: "Generate tickets at the go with your customers",
-						href: PATHS.PRODUCTS.TICKETING_SYSTEM,
+						href: PATHS.PRODUCTS_TICKETING_SYSTEM,
 						icon: "FaSolidTicketAlt",
 					},
 					{
 						label: "Billing System",
 						subLabel: "Easy to integrate Billing System at your fingertips",
-						href: PATHS.PRODUCTS.BILLING_SYSTEM,
+						href: PATHS.PRODUCTS_BILLING_SYSTEM,
 						icon: "FaSolidMoneyCheckAlt",
 					},
 				],
@@ -130,22 +137,22 @@ export const globalData: { headerData: NavbarProps; footerData: FooterProps } = 
 					{
 						label: "Customer Support Automation",
 						icon: "RiCustomerService2Fill",
-						href: PATHS.SOLUTIONS.CUSTOMER_SUPPORT_AUTOMATION,
+						href: PATHS.SOLUTIONS_CUSTOMER_SUPPORT_AUTOMATION,
 					},
 					{
 						label: "Text automation",
 						icon: "BiInputCursorText",
-						href: PATHS.SOLUTIONS.TEXT_AUTOMATION,
+						href: PATHS.SOLUTIONS_TEXT_AUTOMATION,
 					},
 					{
 						label: "Dashboard and Analytics",
 						icon: "IonStatsChart",
-						href: PATHS.SOLUTIONS.DASHBOARD_AND_ANALYTICS,
+						href: PATHS.SOLUTIONS_DASHBOARD_AND_ANALYTICS,
 					},
 					{
 						label: "Artificial Intelligence",
 						icon: "SimpleIconsSmartthings",
-						href: PATHS.SOLUTIONS.ARTIFICIAL_INTELLIGENCE,
+						href: PATHS.SOLUTIONS_ARTIFICIAL_INTELLIGENCE,
 					},
 				],
 			},
@@ -155,56 +162,56 @@ export const globalData: { headerData: NavbarProps; footerData: FooterProps } = 
 					{
 						label: "Ecommerce",
 						icon: "HeroiconsShoppingCartSolid",
-						href: PATHS.INDUSTRIES.ECOMMERCE,
+						href: PATHS.INDUSTRIES_ECOMMERCE,
 					},
 					{
 						label: "Customized",
 						icon: "IcBaselineSettingsSuggest",
-						href: PATHS.INDUSTRIES.CUSTOMIZED,
+						href: PATHS.INDUSTRIES_CUSTOMIZED,
 					},
 					{
 						label: "Logistics",
 						icon: "FaSolidBoxOpen",
-						href: PATHS.INDUSTRIES.LOGISTICS,
+						href: PATHS.INDUSTRIES_LOGISTICS,
 					},
 					{
 						label: "Healthcare",
 						icon: "IcBaselineHealthAndSafety",
-						href: PATHS.INDUSTRIES.HEALTHCARE,
+						href: PATHS.INDUSTRIES_HEALTHCARE,
 					},
 					{
 						label: "Financial Services",
 						icon: "RiMoneyDollarCircleFill",
-						href: PATHS.INDUSTRIES.FINANCIAL_SERVICES,
+						href: PATHS.INDUSTRIES_FINANCIAL_SERVICES,
 					},
 					{
 						label: "Insurance",
 						icon: "IcBaselineSecurity",
-						href: PATHS.INDUSTRIES.INSURANCE,
+						href: PATHS.INDUSTRIES_INSURANCE,
 					},
 					{
 						label: "Sales & Marketing",
 						icon: "IcRoundBusinessCenter",
-						href: PATHS.INDUSTRIES.SALES_AND_MARKETING,
+						href: PATHS.INDUSTRIES_SALES_AND_MARKETING,
 					},
 					{
 						label: "Automotive",
 						icon: "AntDesignCarFilled",
-						href: PATHS.INDUSTRIES.AUTOMOTIVE,
+						href: PATHS.INDUSTRIES_AUTOMOTIVE,
 					},
 					{
 						label: "Real Estate",
 						icon: "IcBaselineRealEstateAgent",
-						href: PATHS.INDUSTRIES.REAL_ESTATE,
+						href: PATHS.INDUSTRIES_REAL_ESTATE,
 					},
 					{
 						label: "Food & Beverage",
 						icon: "IonFastFoodSharp",
-						href: PATHS.INDUSTRIES.FOOD_AND_BEVERAGE,
+						href: PATHS.INDUSTRIES_FOOD_AND_BEVERAGE,
 					},
 				],
 			},
-			{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME },
+			{ label: "Case Studies", href: PATHS.CASE_STUDIES },
 			{
 				label: "Company",
 				nested: [
@@ -215,7 +222,7 @@ export const globalData: { headerData: NavbarProps; footerData: FooterProps } = 
 					},
 					{
 						label: "Where We Are",
-						href: PATHS.WHERE_WE_ARE,
+						href: PATHS.COMPANY_WHERE_WE_ARE,
 						icon: "IcOutlineLocationOn",
 					},
 				],
@@ -232,47 +239,47 @@ export const globalData: { headerData: NavbarProps; footerData: FooterProps } = 
 				links: [
 					{
 						label: "Flow Builder",
-						href: PATHS.PRODUCTS.FLOW_BUILDER,
+						href: PATHS.PRODUCTS_FLOW_BUILDER,
 					},
 					{
 						label: "API'S",
-						href: PATHS.PRODUCTS.API,
+						href: PATHS.PRODUCTS_API,
 					},
 					{
 						label: "CMS",
-						href: PATHS.PRODUCTS.CAMPAIGN_MANAGEMENT_SYSTEM,
+						href: PATHS.PRODUCTS_CAMPAIGN_MANAGEMENT_SYSTEM,
 					},
 					{
 						label: "Adaptive NLP",
-						href: PATHS.PRODUCTS.ADAPTIVE_NLP,
+						href: PATHS.PRODUCTS_ADAPTIVE_NLP,
 					},
 					{
 						label: "Insight Engine",
-						href: PATHS.PRODUCTS.INSIGHT_ENGINE,
+						href: PATHS.PRODUCTS_INSIGHT_ENGINE,
 					},
 					{
 						label: "CRM",
-						href: PATHS.PRODUCTS.CRM,
+						href: PATHS.PRODUCTS_CRM,
 					},
 					{
 						label: "Integrations",
-						href: PATHS.PRODUCTS.INTEGRATIONS,
+						href: PATHS.PRODUCTS_INTEGRATIONS,
 					},
 					{
 						label: "Billing System",
-						href: PATHS.PRODUCTS.BILLING_SYSTEM,
+						href: PATHS.PRODUCTS_BILLING_SYSTEM,
 					},
 					{
 						label: "Ticketing System",
-						href: PATHS.PRODUCTS.TICKETING_SYSTEM,
+						href: PATHS.PRODUCTS_TICKETING_SYSTEM,
 					},
 					{
 						label: "Livechat",
-						href: PATHS.PRODUCTS.LIVECHAT,
+						href: PATHS.PRODUCTS_LIVECHAT,
 					},
 					{
 						label: "Payment Gateway",
-						href: PATHS.PRODUCTS.PAYMENT_GATEWAY,
+						href: PATHS.PRODUCTS_PAYMENT_GATEWAY,
 					},
 				],
 			},
@@ -281,19 +288,19 @@ export const globalData: { headerData: NavbarProps; footerData: FooterProps } = 
 				links: [
 					{
 						label: "Support Automation",
-						href: PATHS.SOLUTIONS.CUSTOMER_SUPPORT_AUTOMATION,
+						href: PATHS.SOLUTIONS_CUSTOMER_SUPPORT_AUTOMATION,
 					},
 					{
 						label: "Text Automation",
-						href: PATHS.SOLUTIONS.TEXT_AUTOMATION,
+						href: PATHS.SOLUTIONS_TEXT_AUTOMATION,
 					},
 					{
 						label: "Dashboard & Analytics",
-						href: PATHS.SOLUTIONS.DASHBOARD_AND_ANALYTICS,
+						href: PATHS.SOLUTIONS_DASHBOARD_AND_ANALYTICS,
 					},
 					{
 						label: "Artificial Intelligence",
-						href: PATHS.SOLUTIONS.ARTIFICIAL_INTELLIGENCE,
+						href: PATHS.SOLUTIONS_ARTIFICIAL_INTELLIGENCE,
 					},
 				],
 			},
@@ -329,11 +336,90 @@ export const globalData: { headerData: NavbarProps; footerData: FooterProps } = 
 			},
 		],
 	},
+	defaultMetaData: {
+		title: {
+			default: "Blue.ai Landing Page",
+			template: `%s | Blue.Ai`,
+		},
+		description:
+			"Using the best in AI and human intelligence, Blue.ai was built with the goal of automating customer and employee interactions across channels to deliver on-demand fulfillment. Simply put, our goal is to improve every organization's business-to-consumer interactions by making them real-time, more intuitive, and more personalized.",
+
+		openGraph: {
+			title: "The Best CX You'll Ever Create | Blue.AI",
+			description:
+				"Using the best in AI and human intelligence, Blue.ai was built with the goal of automating customer and employee interactions across channels to deliver on-demand fulfillment. Simply put, our goal is to improve every organization's business-to-consumer interactions by making them real-time, more intuitive, and more personalized.",
+			url: "https://blue.ai",
+			siteName: "Blue.AI",
+			images: [
+				{
+					url: MetaImages.OgImage.src,
+					width: 1200,
+					height: 630,
+					alt: "Blue.AI Open graph Logo representation",
+				},
+			],
+			type: "website",
+			locale: "en_US",
+		},
+		themeColor: "#ffffff",
+		colorScheme: "light",
+		category: "technology",
+		keywords: [
+			"Blue.Ai",
+			"Omnichannel",
+			"campaigns management system",
+			"telecom",
+			"artificial intelligence",
+			"customer experience",
+			"insight engine",
+			"flow builder",
+			"adaptive nlp",
+			"ticketing system",
+			"crm",
+			"billing system",
+			"payment gateway",
+			"unified platform",
+			"customer support automation",
+			"text automation",
+			"dashboard and anayltics",
+			"technology",
+			"sales and marketing",
+		],
+		metadataBase: new URL("https://blue.ai"),
+		icons: [
+			{ rel: "icon", url: MetaImages.Favicon.src },
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "16x16",
+				url: MetaImages.Favicon16.src,
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "32x32",
+				url: MetaImages.Favicon32.src,
+			},
+			{
+				rel: "apple-touch-icon",
+				sizes: "180x180",
+				url: MetaImages.FaviconApple.src,
+			},
+			{
+				rel: "mask-icon",
+				url: "./images/metadata/safari-pinned-tab.svg",
+				color: "#5bbad5",
+			},
+		],
+		manifest: "./site.webmanifest",
+		other: {
+			"msapplication-TileColor": "#da532c",
+		},
+	},
 }
 
 interface PageShape {
-	// metaData: NextSeoProps
-	metaData: any
+	metaData: Metadata
 	sections: SectionProps[SectionType][]
 }
 
@@ -354,7 +440,7 @@ export const allPagesData: Record<string, PageShape> = {
 						},
 						{
 							label: "Discover more",
-							href: PATHS.PRODUCTS.CAMPAIGN_MANAGEMENT_SYSTEM,
+							href: PATHS.PRODUCTS_CAMPAIGN_MANAGEMENT_SYSTEM,
 						},
 					],
 					imgProps: { ...HeroImg, alt: "Hero section representing Feedback from two valuable customers" },
@@ -557,7 +643,7 @@ export const allPagesData: Record<string, PageShape> = {
 							content: `
 							# Estafeta Mexicana: Streamlining Omnichannel Customer Experience with AI-Powered Logistics
 							
-							Estafeta Mexicana's size has nearly doubled in response to the growing demand for logistics services due to the pandemic. The company aims to integrate all of its digital platforms and provide an omnichannel customer experience. Estafeta has introduced a unified customer experience system (Unified-CX solution). Estafeta is one of the top three companies in the industry in terms of SLA performance, having achieved a 60 percent improvement in its customer service SLA in just two years. The goal of the company in its development is to increase visibility in the international market and expand the reach of its social platform. [Keep reading](${PATHS.CASE_STUDIES.ESTAFETA})
+							Estafeta Mexicana's size has nearly doubled in response to the growing demand for logistics services due to the pandemic. The company aims to integrate all of its digital platforms and provide an omnichannel customer experience. Estafeta has introduced a unified customer experience system (Unified-CX solution). Estafeta is one of the top three companies in the industry in terms of SLA performance, having achieved a 60 percent improvement in its customer service SLA in just two years. The goal of the company in its development is to increase visibility in the international market and expand the reach of its social platform. [Keep reading](${PATHS.CASE_STUDIES_ESTAFETA})
 							`,
 							imgProps: { ...Estafeta.img, alt: "Estafeta Mexicana" },
 						},
@@ -565,7 +651,7 @@ export const allPagesData: Record<string, PageShape> = {
 							content: `
 							# Wells Fargo Enhances Social Media Marketing with Unified Customer Experience Management System
 
-							Wells Fargo is a leading global financial services company and one of the most recognized brands in the banking industry. David Encizo, vice president of marketing technology for social media, wanted to help the company manage the risks and responsibilities associated with its social media activities. He tried to reduce the number of tools and gadgets used in the company and make it easier to work together. Wells Fargo has introduced a 'Unified Customer Experience Management' (UCX) system. The bank's social marketers and social workers now work together on a unified platform where they create and monitor advertising campaigns, plan and publish content aggregation, and listen to online discussions. [Keep Reading](${PATHS.CASE_STUDIES.WELLS_FARGO})
+							Wells Fargo is a leading global financial services company and one of the most recognized brands in the banking industry. David Encizo, vice president of marketing technology for social media, wanted to help the company manage the risks and responsibilities associated with its social media activities. He tried to reduce the number of tools and gadgets used in the company and make it easier to work together. Wells Fargo has introduced a 'Unified Customer Experience Management' (UCX) system. The bank's social marketers and social workers now work together on a unified platform where they create and monitor advertising campaigns, plan and publish content aggregation, and listen to online discussions. [Keep Reading](${PATHS.CASE_STUDIES_WELLS_FARGO})
 							`,
 							imgProps: { ...Wells.img, alt: "Wells Fargo" },
 						},
@@ -573,7 +659,7 @@ export const allPagesData: Record<string, PageShape> = {
 							content: `
 							# YG Entertainment Elevates Fan Engagement with AI-Powered Customer Experience Management
 
-							YG Entertainment is a South Korean entertainment company responsible for creating popular music groups like BIGBANG, BLACKPINK, etc. The company was founded in 1996 with the goal of finding and developing local performers. To better understand their followers, YG Entertainment deployed a market-leading customer experience management platform in May 2020 to monitor fan conversations on over 30 social media and online platforms. The adoption of the platform has allowed YG Entertainment to organize their fan monitoring process in a more methodical manner, resulting in a better understanding of fan emotions and preferences. This helps the company provide its followers with the best experience and form a closer bond with them. [Keep Reading](${PATHS.CASE_STUDIES.YG_ENTERTAINMENT})
+							YG Entertainment is a South Korean entertainment company responsible for creating popular music groups like BIGBANG, BLACKPINK, etc. The company was founded in 1996 with the goal of finding and developing local performers. To better understand their followers, YG Entertainment deployed a market-leading customer experience management platform in May 2020 to monitor fan conversations on over 30 social media and online platforms. The adoption of the platform has allowed YG Entertainment to organize their fan monitoring process in a more methodical manner, resulting in a better understanding of fan emotions and preferences. This helps the company provide its followers with the best experience and form a closer bond with them. [Keep Reading](${PATHS.CASE_STUDIES_YG_ENTERTAINMENT})
 							`,
 							imgProps: { ...Yg.img, alt: "YG Entertainment" },
 						},
@@ -581,7 +667,7 @@ export const allPagesData: Record<string, PageShape> = {
 							content: `
 							# How Prada Group drives premium brand digital innovation
 
-							The Prada Group has adopted a digital-first approach in order to stay ahead of cultural trends and offer customers a seamless shopping experience. They implemented the Unified-CX solution to bring together point solutions and provide a personalized, AI-powered experience for their Millennial and Gen Z customers. The platform allows sales representatives to interact with clients via social media, improve customer service with conversational marketing, and monitor the well-being of the brand. As a result, Prada Group can sell, serve, and maintain customers on a single platform, while compiling important data and achieving complete visibility into their campaigns. [Keep Reading](${PATHS.CASE_STUDIES.PRADA})
+							The Prada Group has adopted a digital-first approach in order to stay ahead of cultural trends and offer customers a seamless shopping experience. They implemented the Unified-CX solution to bring together point solutions and provide a personalized, AI-powered experience for their Millennial and Gen Z customers. The platform allows sales representatives to interact with clients via social media, improve customer service with conversational marketing, and monitor the well-being of the brand. As a result, Prada Group can sell, serve, and maintain customers on a single platform, while compiling important data and achieving complete visibility into their campaigns. [Keep Reading](${PATHS.CASE_STUDIES_PRADA})
 							`,
 							imgProps: { ...Prada.img, alt: "Prada Group" },
 						},
@@ -589,7 +675,7 @@ export const allPagesData: Record<string, PageShape> = {
 							content: `
 							# What Honda did to unify customer service in the new age of online auto sales
 
-							Honda adopted the Unified-CX solution strategy to unify its customer service in the new age of online auto sales. Honda ON, Honda's first online automobile sales website, was positioned for success from the start. To integrate its customer experience management, Honda utilized the Unified-CX solution platform to handle multi-channel customer service offerings, plan and monitor marketing messages, and reduce brand hazards by monitoring social and online sources. With the addition of speech functionality, Honda ON can now provide seamless omnichannel customer service through voice, social media, chatbots, and live chat. The goal of Honda ON is to engage with younger generations of car buyers and provide filled-to-the-brim service quality through social publishing and engagement. [Keep Reading](${PATHS.CASE_STUDIES.HONDA})
+							Honda adopted the Unified-CX solution strategy to unify its customer service in the new age of online auto sales. Honda ON, Honda's first online automobile sales website, was positioned for success from the start. To integrate its customer experience management, Honda utilized the Unified-CX solution platform to handle multi-channel customer service offerings, plan and monitor marketing messages, and reduce brand hazards by monitoring social and online sources. With the addition of speech functionality, Honda ON can now provide seamless omnichannel customer service through voice, social media, chatbots, and live chat. The goal of Honda ON is to engage with younger generations of car buyers and provide filled-to-the-brim service quality through social publishing and engagement. [Keep Reading](${PATHS.CASE_STUDIES_HONDA})
 							`,
 							imgProps: { ...honda.img, alt: "Honda" },
 						},
@@ -597,7 +683,7 @@ export const allPagesData: Record<string, PageShape> = {
 							content: `
 							# How Norse quickly introduced an omnichannel customer service program
 
-							Norse Atlantic Airways, a new low-cost airline, introduced an omnichannel customer service program to provide seamless customer support through channels such as social media, voice, and email. The program is simple to use, with a unified inbox and access to a base of knowledge and prefabricated responses. This helps resolve most customer complaints via self-service and online communication, streamlining workflows and allowing for real-time data-driven customer assistance. The program was implemented quickly and easily, with a user-friendly design. [Keep Reading](${PATHS.CASE_STUDIES.NORSE})
+							Norse Atlantic Airways, a new low-cost airline, introduced an omnichannel customer service program to provide seamless customer support through channels such as social media, voice, and email. The program is simple to use, with a unified inbox and access to a base of knowledge and prefabricated responses. This helps resolve most customer complaints via self-service and online communication, streamlining workflows and allowing for real-time data-driven customer assistance. The program was implemented quickly and easily, with a user-friendly design. [Keep Reading](${PATHS.CASE_STUDIES_NORSE})
 							`,
 							imgProps: { ...norse.img, alt: "Norse" },
 						},
@@ -605,7 +691,7 @@ export const allPagesData: Record<string, PageShape> = {
 							content: `
 							# How AIDA Cruises maintains love even in the face of adversity
 
-							AIDA Cruises, a German cruise line, is known as a 'love brand' with strong affection from both staff and customers. The company faced the challenge of keeping the romance alive during the epidemic when all of its 14 ships were halted for several weeks. In 2017, AIDA digital team uses social listening and engagement to monitor customer feedback in real-time and provide prompt responses. The company was able to withstand the slump in tourism in 2020 and maintain contact with its clients and residents through social media, notifications, and dashboard. [Keep Reading](${PATHS.CASE_STUDIES.AIDA_CRUISES})
+							AIDA Cruises, a German cruise line, is known as a 'love brand' with strong affection from both staff and customers. The company faced the challenge of keeping the romance alive during the epidemic when all of its 14 ships were halted for several weeks. In 2017, AIDA digital team uses social listening and engagement to monitor customer feedback in real-time and provide prompt responses. The company was able to withstand the slump in tourism in 2020 and maintain contact with its clients and residents through social media, notifications, and dashboard. [Keep Reading](${PATHS.CASE_STUDIES_AIDA_CRUISES})
 							`,
 							imgProps: { ...aida.img, alt: "AIDA" },
 						},
@@ -614,7 +700,7 @@ export const allPagesData: Record<string, PageShape> = {
 			},
 		],
 	},
-	[PATHS.PRODUCTS.CAMPAIGN_MANAGEMENT_SYSTEM]: {
+	[PATHS.PRODUCTS_CAMPAIGN_MANAGEMENT_SYSTEM]: {
 		metaData: {
 			title: "Campaign Management System Product",
 			description:
@@ -726,14 +812,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					nextPage: { label: "Flow Builder", subLabel: "Products:", href: PATHS.PRODUCTS.FLOW_BUILDER },
+					nextPage: { label: "Flow Builder", subLabel: "Products:", href: PATHS.PRODUCTS_FLOW_BUILDER },
 					previousPage: { label: "Home", href: PATHS.HOME },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.FLOW_BUILDER]: {
+	[PATHS.PRODUCTS_FLOW_BUILDER]: {
 		metaData: {
 			title: "Flow builder Product",
 			description:
@@ -970,14 +1056,14 @@ export const allPagesData: Record<string, PageShape> = {
 					previousPage: {
 						label: "Campaign Management System",
 						subLabel: "Products:",
-						href: PATHS.PRODUCTS.CAMPAIGN_MANAGEMENT_SYSTEM,
+						href: PATHS.PRODUCTS_CAMPAIGN_MANAGEMENT_SYSTEM,
 					},
-					nextPage: { label: "Adaptive NLP", subLabel: "Products:", href: PATHS.PRODUCTS.ADAPTIVE_NLP },
+					nextPage: { label: "Adaptive NLP", subLabel: "Products:", href: PATHS.PRODUCTS_ADAPTIVE_NLP },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.ADAPTIVE_NLP]: {
+	[PATHS.PRODUCTS_ADAPTIVE_NLP]: {
 		metaData: {
 			title: "Adaptive NLP Product",
 			description:
@@ -1063,13 +1149,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Flow Builder", subLabel: "Products:", href: PATHS.PRODUCTS.FLOW_BUILDER },
-					nextPage: { label: "API's", subLabel: "Products:", href: PATHS.PRODUCTS.API },
+					previousPage: { label: "Flow Builder", subLabel: "Products:", href: PATHS.PRODUCTS_FLOW_BUILDER },
+					nextPage: { label: "API's", subLabel: "Products:", href: PATHS.PRODUCTS_API },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.API]: {
+	[PATHS.PRODUCTS_API]: {
 		metaData: {
 			title: "API's as a Product",
 			description:
@@ -1103,7 +1189,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					Follow these steps to register for access keys, setup and test, subscribe to Webhooks, and review the documentation and tutorials.
 					`,
-					className: "max-w-[831px]",
+					className: "w-[831px]",
 				},
 				body: {
 					cards: [
@@ -1154,20 +1240,20 @@ export const allPagesData: Record<string, PageShape> = {
 							imgProps: { ...ApiImages.img8, alt: "Community" },
 						},
 					],
-					classNames: { cardClassName: "min-h-[286px]" },
+					classNames: { cardClassName: "2xl:min-h-[286px]" },
 				},
 			},
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Adaptive NLP", subLabel: "Products:", href: PATHS.PRODUCTS.ADAPTIVE_NLP },
-					nextPage: { label: "Insight Engine", subLabel: "Products:", href: PATHS.PRODUCTS.INSIGHT_ENGINE },
+					previousPage: { label: "Adaptive NLP", subLabel: "Products:", href: PATHS.PRODUCTS_ADAPTIVE_NLP },
+					nextPage: { label: "Insight Engine", subLabel: "Products:", href: PATHS.PRODUCTS_INSIGHT_ENGINE },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.INSIGHT_ENGINE]: {
+	[PATHS.PRODUCTS_INSIGHT_ENGINE]: {
 		metaData: {
 			title: "Insight Engine Product",
 			description:
@@ -1282,13 +1368,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "API's", subLabel: "Products:", href: PATHS.PRODUCTS.API },
-					nextPage: { label: "Livechat", subLabel: "Products:", href: PATHS.PRODUCTS.LIVECHAT },
+					previousPage: { label: "API's", subLabel: "Products:", href: PATHS.PRODUCTS_API },
+					nextPage: { label: "Livechat", subLabel: "Products:", href: PATHS.PRODUCTS_LIVECHAT },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.LIVECHAT]: {
+	[PATHS.PRODUCTS_LIVECHAT]: {
 		metaData: {
 			title: "Live Chat Widget Product",
 			description:
@@ -1344,7 +1430,7 @@ export const allPagesData: Record<string, PageShape> = {
 							imgProps: { ...LiveChatImgs.tiny3, alt: "Conversations" },
 						},
 					],
-					classNames: { cardClassName: "min-h-[352px]" },
+					classNames: { cardClassName: "2xl:min-h-[352px]" },
 				},
 			},
 			{
@@ -1385,7 +1471,7 @@ export const allPagesData: Record<string, PageShape> = {
 							imgProps: { ...LiveChatImgs.tiny6, alt: "Client happiness" },
 						},
 					],
-					classNames: { cardClassName: "max-w-[324px]" },
+					classNames: { cardClassName: "md:max-w-[324px]" },
 				},
 			},
 			{
@@ -1474,13 +1560,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Insight Engine", subLabel: "Products:", href: PATHS.PRODUCTS.INSIGHT_ENGINE },
-					nextPage: { label: "CRM", subLabel: "Products:", href: PATHS.PRODUCTS.CRM },
+					previousPage: { label: "Insight Engine", subLabel: "Products:", href: PATHS.PRODUCTS_INSIGHT_ENGINE },
+					nextPage: { label: "CRM", subLabel: "Products:", href: PATHS.PRODUCTS_CRM },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.CRM]: {
+	[PATHS.PRODUCTS_CRM]: {
 		metaData: {
 			title: "CRM Product",
 			description:
@@ -1534,14 +1620,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Livechat", subLabel: "Products:", href: PATHS.PRODUCTS.LIVECHAT },
-					nextPage: { label: "Payment Gateway", subLabel: "Products:", href: PATHS.PRODUCTS.PAYMENT_GATEWAY },
+					previousPage: { label: "Livechat", subLabel: "Products:", href: PATHS.PRODUCTS_LIVECHAT },
+					nextPage: { label: "Payment Gateway", subLabel: "Products:", href: PATHS.PRODUCTS_PAYMENT_GATEWAY },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.PAYMENT_GATEWAY]: {
+	[PATHS.PRODUCTS_PAYMENT_GATEWAY]: {
 		metaData: {
 			title: "Payment Gateway Product",
 			description:
@@ -1603,14 +1689,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "CRM", subLabel: "Products:", href: PATHS.PRODUCTS.CRM },
-					nextPage: { label: "Integrations", subLabel: "Products:", href: PATHS.PRODUCTS.INTEGRATIONS },
+					previousPage: { label: "CRM", subLabel: "Products:", href: PATHS.PRODUCTS_CRM },
+					nextPage: { label: "Integrations", subLabel: "Products:", href: PATHS.PRODUCTS_INTEGRATIONS },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.INTEGRATIONS]: {
+	[PATHS.PRODUCTS_INTEGRATIONS]: {
 		metaData: {
 			title: "Integrations as a Product",
 			description:
@@ -1668,7 +1754,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					No issue if the tool you use lacks integrated APIs. Blue.ai will be smoothly integrated with your own product, tech stack, and other tools thanks to the unique integrations we'll design for you.
 					`,
-					className: "max-w-[1114px]",
+					className: "w-[1114px]",
 				},
 				body: {
 					...IntegrationsImgs.img2,
@@ -1681,13 +1767,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Payment Gateway", subLabel: "Products:", href: PATHS.PRODUCTS.PAYMENT_GATEWAY },
-					nextPage: { label: "Ticketing System", subLabel: "Products:", href: PATHS.PRODUCTS.TICKETING_SYSTEM },
+					previousPage: { label: "Payment Gateway", subLabel: "Products:", href: PATHS.PRODUCTS_PAYMENT_GATEWAY },
+					nextPage: { label: "Ticketing System", subLabel: "Products:", href: PATHS.PRODUCTS_TICKETING_SYSTEM },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.TICKETING_SYSTEM]: {
+	[PATHS.PRODUCTS_TICKETING_SYSTEM]: {
 		metaData: {
 			title: "Ticketing System Product",
 			description: "Keep track of client requests from various departments, brands, and platforms.",
@@ -1756,20 +1842,20 @@ export const allPagesData: Record<string, PageShape> = {
 							imgProps: { ...TicketImgs.img8, alt: "Live Talk" },
 						},
 					],
-					classNames: { cardClassName: "min-h-[201px]" },
+					classNames: { cardClassName: "2xl:min-h-[201px]" },
 				},
 			},
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Integrations", subLabel: "Products:", href: PATHS.PRODUCTS.INTEGRATIONS },
-					nextPage: { label: "Billing System", subLabel: "Products:", href: PATHS.PRODUCTS.BILLING_SYSTEM },
+					previousPage: { label: "Integrations", subLabel: "Products:", href: PATHS.PRODUCTS_INTEGRATIONS },
+					nextPage: { label: "Billing System", subLabel: "Products:", href: PATHS.PRODUCTS_BILLING_SYSTEM },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.PRODUCTS.BILLING_SYSTEM]: {
+	[PATHS.PRODUCTS_BILLING_SYSTEM]: {
 		metaData: {
 			title: "Billing System Product",
 			description:
@@ -1837,13 +1923,13 @@ export const allPagesData: Record<string, PageShape> = {
 							imgProps: { ...BillingImgs.img6, alt: "Monetization management" },
 						},
 					],
-					classNames: { cardClassName: "min-h-[260px]" },
+					classNames: { cardClassName: "2xl:min-h-[260px]" },
 				},
 			},
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Ticketing System", subLabel: "Products:", href: PATHS.PRODUCTS.TICKETING_SYSTEM },
+					previousPage: { label: "Ticketing System", subLabel: "Products:", href: PATHS.PRODUCTS_TICKETING_SYSTEM },
 					nextPage: { label: "Unified Platform", href: PATHS.UNIFIED_PLATFORM },
 					classNames: { sectionClassName: BLUE_BG },
 				},
@@ -1868,7 +1954,7 @@ export const allPagesData: Record<string, PageShape> = {
 					content: `
 					# The Best CX
 					# You'll Ever Create`,
-					className: "gap-1",
+					className: "!gap-1",
 				},
 				body: {
 					cards: [
@@ -1880,7 +1966,7 @@ export const allPagesData: Record<string, PageShape> = {
 							`,
 							imgProps: { ...UnifiedPlatformImgs.img1, alt: "Worldwide communication" },
 							flexDirection: "flex-row",
-							textSectionClassName: "[&>p]:max-w-[600px]",
+							textSectionClassName: "md:[&>p]:max-w-[600px]",
 						},
 						{
 							content: `
@@ -1890,7 +1976,7 @@ export const allPagesData: Record<string, PageShape> = {
 							`,
 							imgProps: { ...UnifiedPlatformImgs.img2, alt: "Customer data over social media" },
 							flexDirection: ROW_REVERSE,
-							textSectionClassName: "[&>h2]:max-w-[600px] [&>p]:max-w-[575px]",
+							textSectionClassName: "md:[&>h2]:max-w-[600px] md:[&>p]:max-w-[575px]",
 						},
 						{
 							content: `
@@ -1905,14 +1991,14 @@ export const allPagesData: Record<string, PageShape> = {
 								alt: "Customer connecting across all channels",
 							},
 							flexDirection: "flex-row",
-							textSectionClassName: "[&>h2]:max-w-[455px] [&>p]:max-w-[600px]",
+							textSectionClassName: "md:[&>h2]:max-w-[455px] md:[&>p]:max-w-[600px]",
 						},
 					],
-					classNames: { innerClassName: "gap-0" },
+					classNames: { innerClassName: "lg:!gap-0" },
 				},
 				footer: {
 					content: `**There is a better way forward for the unifiers: unified customer experience management (Unified-CX solution).**`,
-					className: "max-w-[688px] font-black",
+					className: "md:max-w-[688px] font-black",
 				},
 			},
 			{
@@ -1931,7 +2017,7 @@ export const allPagesData: Record<string, PageShape> = {
 							`,
 							imgProps: { ...UnifiedPlatformImgs.img4, alt: "Customer-centricity" },
 							flexDirection: "flex-row",
-							textSectionClassName: "[&>p]:max-w-[600px]",
+							textSectionClassName: "md:[&>p]:max-w-[600px]",
 						},
 						{
 							content: `
@@ -1941,7 +2027,7 @@ export const allPagesData: Record<string, PageShape> = {
 							`,
 							imgProps: { ...UnifiedPlatformImgs.img5, alt: "Meet your cusotmers in their preferred channel" },
 							flexDirection: ROW_REVERSE,
-							textSectionClassName: "[&>p]:max-w-[552px]",
+							textSectionClassName: "md:[&>p]:max-w-[552px]",
 						},
 						{
 							content: `
@@ -1953,17 +2039,12 @@ export const allPagesData: Record<string, PageShape> = {
 							`,
 							imgProps: { ...UnifiedPlatformImgs.img6, alt: "AI-powered CX" },
 							flexDirection: "flex-row",
-							textSectionClassName: "[&>p]:max-w-[578px]",
+							textSectionClassName: "md:[&>p]:max-w-[578px]",
 						},
 					],
 					classNames: {
-						// section: {
-						// 	background: `#F6FBFD url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1529.913 1705.315"><defs><clipPath id="a"><path fill="%236abdea" d="M242.262 572.061c0 181.842 147.941 329.8 329.8 329.8 181.936 0 329.878-147.957 329.878-329.8 0-181.858-147.941-329.8-329.878-329.8-181.858 0-329.8 147.941-329.8 329.8M0 572.061C0 256.615 256.615 0 572.061 0S1144.2 256.615 1144.2 572.061c0 315.43-256.694 572.061-572.139 572.061S0 887.49 0 572.061" data-name="Path 1772"/></clipPath><clipPath id="b"><path fill="%236abdea" d="M149.641 299.314a149.657 149.657 0 1 1 149.673-149.642 149.644 149.644 0 0 1-149.673 149.642Z" data-name="Path 1773"/></clipPath></defs><g data-name="Group 23572" opacity=".06"><g data-name="Group 23534"><g clip-path="url(%23a)" data-name="Group 23533" transform="rotate(116 553.465 816.456)"><path fill="%236abdea" d="M219.477-450.512 1594.69 219.503l-670 1375.18L-450.521 924.67z" data-name="Rectangle 5381"/></g></g><g data-name="Group 23536"><g clip-path="url(%23b)" data-name="Group 23535" transform="rotate(116 231.973 236.175)"><path fill="%236abdea" d="M57.413-117.855 417.166 57.419 241.89 417.172-117.86 241.898z" data-name="Rectangle 5382"/></g></g></g></svg>') no-repeat 50%`,
-						// 	backgroundSize: "80%",
-						// 	backgroundPositionY: 40,
-						// },
-						sectionClassName: `bg-[url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1529.913 1705.315"><defs><clipPath id="a"><path fill="%236abdea" d="M242.262 572.061c0 181.842 147.941 329.8 329.8 329.8 181.936 0 329.878-147.957 329.878-329.8 0-181.858-147.941-329.8-329.878-329.8-181.858 0-329.8 147.941-329.8 329.8M0 572.061C0 256.615 256.615 0 572.061 0S1144.2 256.615 1144.2 572.061c0 315.43-256.694 572.061-572.139 572.061S0 887.49 0 572.061" data-name="Path 1772"/></clipPath><clipPath id="b"><path fill="%236abdea" d="M149.641 299.314a149.657 149.657 0 1 1 149.673-149.642 149.644 149.644 0 0 1-149.673 149.642Z" data-name="Path 1773"/></clipPath></defs><g data-name="Group 23572" opacity=".06"><g data-name="Group 23534"><g clip-path="url(%23a)" data-name="Group 23533" transform="rotate(116 553.465 816.456)"><path fill="%236abdea" d="M219.477-450.512 1594.69 219.503l-670 1375.18L-450.521 924.67z" data-name="Rectangle 5381"/></g></g><g data-name="Group 23536"><g clip-path="url(%23b)" data-name="Group 23535" transform="rotate(116 231.973 236.175)"><path fill="%236abdea" d="M57.413-117.855 417.166 57.419 241.89 417.172-117.86 241.898z" data-name="Rectangle 5382"/></g></g></g></svg>')] bg-no-repeat bg-[length:80%]`,
-						innerClassName: "gap-[100px]",
+						sectionClassName: "custom-background",
+						innerClassName: "lg:!gap-[100px]",
 					},
 				},
 				footer: {
@@ -1974,17 +2055,17 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Billing System", subLabel: "Products:", href: PATHS.PRODUCTS.BILLING_SYSTEM },
+					previousPage: { label: "Billing System", subLabel: "Products:", href: PATHS.PRODUCTS_BILLING_SYSTEM },
 					nextPage: {
 						label: "Customer Support Automation",
 						subLabel: "Solutions:",
-						href: PATHS.SOLUTIONS.CUSTOMER_SUPPORT_AUTOMATION,
+						href: PATHS.SOLUTIONS_CUSTOMER_SUPPORT_AUTOMATION,
 					},
 				},
 			},
 		],
 	},
-	[PATHS.SOLUTIONS.CUSTOMER_SUPPORT_AUTOMATION]: {
+	[PATHS.SOLUTIONS_CUSTOMER_SUPPORT_AUTOMATION]: {
 		metaData: {
 			title: "Customer Support Automation Solution",
 			description:
@@ -2005,7 +2086,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					Keep your customers informed of progress. Use an AI-chatbot to instantly and continuously answer questions in any language via text or voice. 70% of questions are self-serve, and live agents are seamlessly looped in as necessary. literally the best of both worlds.
 					`,
-					className: "max-w-[865px]",
+					className: "w-[865px]",
 				},
 				body: {},
 			},
@@ -2080,13 +2161,13 @@ export const allPagesData: Record<string, PageShape> = {
 					nextPage: {
 						label: "Text Automation",
 						subLabel: "Solutions:",
-						href: PATHS.SOLUTIONS.TEXT_AUTOMATION,
+						href: PATHS.SOLUTIONS_TEXT_AUTOMATION,
 					},
 				},
 			},
 		],
 	},
-	[PATHS.SOLUTIONS.TEXT_AUTOMATION]: {
+	[PATHS.SOLUTIONS_TEXT_AUTOMATION]: {
 		metaData: {
 			title: "Text Automation Solution",
 			description:
@@ -2109,7 +2190,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					5 billion social media users text. Create a bot for 35+ messaging apps. Automate CX workflows, improve conversions, and delight customers.
 					`,
-					className: "max-w-[865px]",
+					className: "w-[865px]",
 				},
 				body: {},
 			},
@@ -2149,18 +2230,18 @@ export const allPagesData: Record<string, PageShape> = {
 					previousPage: {
 						label: "Customer Support Automation",
 						subLabel: "Solutions:",
-						href: PATHS.SOLUTIONS.CUSTOMER_SUPPORT_AUTOMATION,
+						href: PATHS.SOLUTIONS_CUSTOMER_SUPPORT_AUTOMATION,
 					},
 					nextPage: {
 						label: "Dashboard and Analytics",
 						subLabel: "Solutions:",
-						href: PATHS.SOLUTIONS.DASHBOARD_AND_ANALYTICS,
+						href: PATHS.SOLUTIONS_DASHBOARD_AND_ANALYTICS,
 					},
 				},
 			},
 		],
 	},
-	[PATHS.SOLUTIONS.DASHBOARD_AND_ANALYTICS]: {
+	[PATHS.SOLUTIONS_DASHBOARD_AND_ANALYTICS]: {
 		metaData: {
 			title: "Dashboard And Analytics Solution",
 			description:
@@ -2183,7 +2264,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					Right? Not. Connect our platform to your knowledge source, let our NLP models intelligently formulate queries, analyze intent, and extract answers, and voila! FAQ bot ready.
 					`,
-					className: "max-w-[865px]",
+					className: "w-[865px]",
 				},
 				body: {},
 			},
@@ -2251,18 +2332,18 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Text Automation", subLabel: "Solutions:", href: PATHS.SOLUTIONS.TEXT_AUTOMATION },
+					previousPage: { label: "Text Automation", subLabel: "Solutions:", href: PATHS.SOLUTIONS_TEXT_AUTOMATION },
 					nextPage: {
 						label: "Artificial Intelligence",
 						subLabel: "Solutions:",
-						href: PATHS.SOLUTIONS.ARTIFICIAL_INTELLIGENCE,
+						href: PATHS.SOLUTIONS_ARTIFICIAL_INTELLIGENCE,
 					},
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.SOLUTIONS.ARTIFICIAL_INTELLIGENCE]: {
+	[PATHS.SOLUTIONS_ARTIFICIAL_INTELLIGENCE]: {
 		metaData: {
 			title: "Artificial Intelligence Solution",
 			description:
@@ -2321,13 +2402,9 @@ export const allPagesData: Record<string, PageShape> = {
 						},
 					],
 					classNames: {
-						// section: {
-						// 	background: `#F6FBFD url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="659"><defs><clipPath id="a"><path fill="%23f6fbfd" d="M0 469h1920v659H0Z" data-name="Path 51787"/></clipPath><clipPath id="b"><path fill="%236abdea" d="M164.955 389.515c0-123.816 100.733-224.559 224.559-224.559 123.88 0 224.613 100.744 224.613 224.559S513.395 614.074 389.515 614.074c-123.826 0-224.559-100.733-224.559-224.559M0 389.515C0 604.3 174.729 779.03 389.515 779.03S779.083 604.3 779.083 389.515 604.3 0 389.515 0 0 174.739 0 389.515" data-name="Path 1772"/></clipPath><clipPath id="c"><path fill="%236abdea" d="M101.89 0A101.9 101.9 0 1 0 203.8 101.89 101.892 101.892 0 0 0 101.89 0Z" data-name="Path 1773"/></clipPath></defs><g clip-path="url(%23a)" data-name="Mask Group 21" transform="translate(0 -469)"><g data-name="Group 69447" opacity=".06"><g data-name="Group 23534"><g clip-path="url(%23b)" data-name="Group 23533" transform="scale(-1) rotate(-82 -997.936 413.903)"><path fill="%236abdea" d="m-306.727 149.436 936.38-456.212 456.2 936.357-936.38 456.212z" data-name="Rectangle 5381"/></g></g><g data-name="Group 23536"><g clip-path="url(%23c)" data-name="Group 23535" transform="scale(-1) rotate(-82 -1086.983 531.977)"><path fill="%236abdea" d="M-80.243 39.097 164.712-80.247l119.344 244.955L39.101 284.052z" data-name="Rectangle 5382"/></g></g></g></g></svg>') no-repeat`,
-						// 	backgroundSize: "cover",
-						// 	paddingBottom: 130,
-						// },
-						cardClassName: "min-h-[250px] max-w-[427px]",
-						gridClassName: "grid-cols-4",
+						sectionClassName: "custom-background-small pb-[130px]",
+						cardClassName: "2xl:min-h-[250px] max-w-[427px]",
+						gridClassName: "2xl:grid-cols-4",
 					},
 				},
 			},
@@ -2337,14 +2414,14 @@ export const allPagesData: Record<string, PageShape> = {
 					previousPage: {
 						label: "Dashboard and Analytics",
 						subLabel: "Solutions:",
-						href: PATHS.SOLUTIONS.DASHBOARD_AND_ANALYTICS,
+						href: PATHS.SOLUTIONS_DASHBOARD_AND_ANALYTICS,
 					},
-					nextPage: { label: "Ecommerce", subLabel: "Industries:", href: PATHS.INDUSTRIES.ECOMMERCE },
+					nextPage: { label: "Ecommerce", subLabel: "Industries:", href: PATHS.INDUSTRIES_ECOMMERCE },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.ECOMMERCE]: {
+	[PATHS.INDUSTRIES_ECOMMERCE]: {
 		metaData: {
 			title: "E-Commerce Industry",
 			description:
@@ -2367,7 +2444,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					Unique do-it-yourself solutions to increase sales, optimize processes, and improve customer service
 					`,
-					className: "max-w-[675px]",
+					className: "w-[675px]",
 				},
 				body: {
 					cards: [
@@ -2450,14 +2527,14 @@ export const allPagesData: Record<string, PageShape> = {
 					previousPage: {
 						label: "Artificial Intelligence",
 						subLabel: "Solutions:",
-						href: PATHS.SOLUTIONS.ARTIFICIAL_INTELLIGENCE,
+						href: PATHS.SOLUTIONS_ARTIFICIAL_INTELLIGENCE,
 					},
-					nextPage: { label: "Customized", subLabel: "Industries:", href: PATHS.INDUSTRIES.CUSTOMIZED },
+					nextPage: { label: "Customized", subLabel: "Industries:", href: PATHS.INDUSTRIES_CUSTOMIZED },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.CUSTOMIZED]: {
+	[PATHS.INDUSTRIES_CUSTOMIZED]: {
 		metaData: {
 			title: "Customized Industry",
 			description:
@@ -2480,7 +2557,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					Better professional connections, better consumer experiences, and better assistance for everyone.
 					`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -2527,14 +2604,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Ecommerce", subLabel: "Industries:", href: PATHS.INDUSTRIES.ECOMMERCE },
-					nextPage: { label: "Logistics", subLabel: "Industries:", href: PATHS.INDUSTRIES.LOGISTICS },
+					previousPage: { label: "Ecommerce", subLabel: "Industries:", href: PATHS.INDUSTRIES_ECOMMERCE },
+					nextPage: { label: "Logistics", subLabel: "Industries:", href: PATHS.INDUSTRIES_LOGISTICS },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.LOGISTICS]: {
+	[PATHS.INDUSTRIES_LOGISTICS]: {
 		metaData: {
 			title: "Logistics Industry",
 			description:
@@ -2557,7 +2634,7 @@ export const allPagesData: Record<string, PageShape> = {
 	
 					Boosting modern fulfillment experiences with communication tools to increase delivery success.
 					`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -2621,13 +2698,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Customized", subLabel: "Industries:", href: PATHS.INDUSTRIES.CUSTOMIZED },
-					nextPage: { label: "Healthcare", subLabel: "Industries:", href: PATHS.INDUSTRIES.HEALTHCARE },
+					previousPage: { label: "Customized", subLabel: "Industries:", href: PATHS.INDUSTRIES_CUSTOMIZED },
+					nextPage: { label: "Healthcare", subLabel: "Industries:", href: PATHS.INDUSTRIES_HEALTHCARE },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.HEALTHCARE]: {
+	[PATHS.INDUSTRIES_HEALTHCARE]: {
 		metaData: {
 			title: "Healthcare Industry",
 			description:
@@ -2649,7 +2726,7 @@ export const allPagesData: Record<string, PageShape> = {
 					### Bring new communication methods to your work
 	
 					Automated, omnichannel communication can assist patients and empower physicians.`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -2692,14 +2769,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Logistics", subLabel: "Industries:", href: PATHS.INDUSTRIES.LOGISTICS },
-					nextPage: { label: "Financial Services", subLabel: "Industries:", href: PATHS.INDUSTRIES.FINANCIAL_SERVICES },
+					previousPage: { label: "Logistics", subLabel: "Industries:", href: PATHS.INDUSTRIES_LOGISTICS },
+					nextPage: { label: "Financial Services", subLabel: "Industries:", href: PATHS.INDUSTRIES_FINANCIAL_SERVICES },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.FINANCIAL_SERVICES]: {
+	[PATHS.INDUSTRIES_FINANCIAL_SERVICES]: {
 		metaData: {
 			title: "Financial Services Industry",
 			description:
@@ -2721,7 +2798,7 @@ export const allPagesData: Record<string, PageShape> = {
 					### Establish lasting relationships based on trust
 	
 					With omnichannel support and communication, you can establish connections with customers, stop fraud, and grow your network.`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -2777,13 +2854,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Healthcare", subLabel: "Industries:", href: PATHS.INDUSTRIES.HEALTHCARE },
-					nextPage: { label: "Insurance", subLabel: "Industries:", href: PATHS.INDUSTRIES.INSURANCE },
+					previousPage: { label: "Healthcare", subLabel: "Industries:", href: PATHS.INDUSTRIES_HEALTHCARE },
+					nextPage: { label: "Insurance", subLabel: "Industries:", href: PATHS.INDUSTRIES_INSURANCE },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.INSURANCE]: {
+	[PATHS.INDUSTRIES_INSURANCE]: {
 		metaData: {
 			title: "Insurance Industry",
 			description:
@@ -2805,7 +2882,7 @@ export const allPagesData: Record<string, PageShape> = {
 					### Make sure you connect with customers on their preferred channels.
 	
 					To increase sales for your company, make quotes and claims simpler for your customers.`,
-					className: "max-w-[740px]",
+					className: "w-[740px]",
 				},
 				body: {},
 			},
@@ -2850,19 +2927,19 @@ export const allPagesData: Record<string, PageShape> = {
 					previousPage: {
 						label: "Financial Services",
 						subLabel: "Industries:",
-						href: PATHS.INDUSTRIES.FINANCIAL_SERVICES,
+						href: PATHS.INDUSTRIES_FINANCIAL_SERVICES,
 					},
 					nextPage: {
 						label: "Sales and Marketing",
 						subLabel: "Industries:",
-						href: PATHS.INDUSTRIES.SALES_AND_MARKETING,
+						href: PATHS.INDUSTRIES_SALES_AND_MARKETING,
 					},
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.SALES_AND_MARKETING]: {
+	[PATHS.INDUSTRIES_SALES_AND_MARKETING]: {
 		metaData: {
 			title: "Sales & Marketing Industry",
 			description:
@@ -2884,7 +2961,7 @@ export const allPagesData: Record<string, PageShape> = {
 					### With only calls and emails, you won't achieve your aims.
 	
 					In order to get more qualified leads and quick sales interaction, use omnichannel marketing initiatives.`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -2942,13 +3019,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Insurance", subLabel: "Industries:", href: PATHS.INDUSTRIES.INSURANCE },
-					nextPage: { label: "Automotive", subLabel: "Industries:", href: PATHS.INDUSTRIES.AUTOMOTIVE },
+					previousPage: { label: "Insurance", subLabel: "Industries:", href: PATHS.INDUSTRIES_INSURANCE },
+					nextPage: { label: "Automotive", subLabel: "Industries:", href: PATHS.INDUSTRIES_AUTOMOTIVE },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.AUTOMOTIVE]: {
+	[PATHS.INDUSTRIES_AUTOMOTIVE]: {
 		metaData: {
 			title: "Automotive Industry",
 			description:
@@ -2970,7 +3047,7 @@ export const allPagesData: Record<string, PageShape> = {
 					### Bring the whole (digital) package to your clients.
 	
 					With contemporary communication tools for your dealership, you can generate leads, engage customers, and send useful service reminders.`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -3037,14 +3114,14 @@ export const allPagesData: Record<string, PageShape> = {
 					previousPage: {
 						label: "Sales and Marketing",
 						subLabel: "Industries:",
-						href: PATHS.INDUSTRIES.SALES_AND_MARKETING,
+						href: PATHS.INDUSTRIES_SALES_AND_MARKETING,
 					},
-					nextPage: { label: "Real Estate", subLabel: "Industries:", href: PATHS.INDUSTRIES.REAL_ESTATE },
+					nextPage: { label: "Real Estate", subLabel: "Industries:", href: PATHS.INDUSTRIES_REAL_ESTATE },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.REAL_ESTATE]: {
+	[PATHS.INDUSTRIES_REAL_ESTATE]: {
 		metaData: {
 			title: "Real Estate Industry",
 			description:
@@ -3066,7 +3143,7 @@ export const allPagesData: Record<string, PageShape> = {
 					### Sell properties more quickly with less work.
 	
 					With multichannel communication, you can automate FAQs, promote listings, and develop client connections.`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -3125,13 +3202,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Automotive", subLabel: "Industries:", href: PATHS.INDUSTRIES.AUTOMOTIVE },
-					nextPage: { label: "Food and Beverage", subLabel: "Industries:", href: PATHS.INDUSTRIES.FOOD_AND_BEVERAGE },
+					previousPage: { label: "Automotive", subLabel: "Industries:", href: PATHS.INDUSTRIES_AUTOMOTIVE },
+					nextPage: { label: "Food and Beverage", subLabel: "Industries:", href: PATHS.INDUSTRIES_FOOD_AND_BEVERAGE },
 				},
 			},
 		],
 	},
-	[PATHS.INDUSTRIES.FOOD_AND_BEVERAGE]: {
+	[PATHS.INDUSTRIES_FOOD_AND_BEVERAGE]: {
 		metaData: {
 			title: "Food Beverage Industry",
 			description:
@@ -3153,7 +3230,7 @@ export const allPagesData: Record<string, PageShape> = {
 					### Communicate flavorfully
 	
 					To reach more hungry diners and customers, share your meals, beverages, and other offerings across all platforms.`,
-					className: "max-w-[673px]",
+					className: "w-[673px]",
 				},
 				body: {},
 			},
@@ -3232,13 +3309,13 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Real Estate", subLabel: "Industries:", href: PATHS.INDUSTRIES.REAL_ESTATE },
-					nextPage: { label: "Case Studies", href: PATHS.CASE_STUDIES.HOME },
+					previousPage: { label: "Real Estate", subLabel: "Industries:", href: PATHS.INDUSTRIES_REAL_ESTATE },
+					nextPage: { label: "Case Studies", href: PATHS.CASE_STUDIES },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.HOME]: {
+	[PATHS.CASE_STUDIES]: {
 		metaData: {
 			title: "Case Studies",
 			description:
@@ -3349,12 +3426,11 @@ export const allPagesData: Record<string, PageShape> = {
 							},
 						},
 					],
-					classNames: { sectionClassName: "pb-[200px]" },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.ESTAFETA]: {
+	[PATHS.CASE_STUDIES_ESTAFETA]: {
 		metaData: {
 			title: "Estafeta Case Study",
 			description:
@@ -3375,7 +3451,7 @@ export const allPagesData: Record<string, PageShape> = {
 
 					## Estafeta optimizes omnichannel experiences with best-in-class logistics operations and a 60% boost incustomer support SLA.
 					`,
-					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME }, { label: "Estafeta" }],
+					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES }, { label: "Estafeta" }],
 					classNames: { innerClassName: "max-w-[701px]" },
 				},
 			},
@@ -3437,14 +3513,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Case Studies", href: PATHS.CASE_STUDIES.HOME },
-					nextPage: { label: "Wells Fargo", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.WELLS_FARGO },
+					previousPage: { label: "Case Studies", href: PATHS.CASE_STUDIES },
+					nextPage: { label: "Wells Fargo", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_WELLS_FARGO },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.WELLS_FARGO]: {
+	[PATHS.CASE_STUDIES_WELLS_FARGO]: {
 		metaData: {
 			title: "Wells Fargo Case Study",
 			description:
@@ -3465,7 +3541,7 @@ export const allPagesData: Record<string, PageShape> = {
 
 					## Wells Fargo Ensures That Customers Have A Consistent Experience And Input On All Social Media Platforms
 					`,
-					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME }, { label: "Wells Fargo" }],
+					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES }, { label: "Wells Fargo" }],
 					classNames: { innerClassName: "max-w-[780px]" },
 				},
 			},
@@ -3531,14 +3607,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Estafeta", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.ESTAFETA },
-					nextPage: { label: "YG Entertainment", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.YG_ENTERTAINMENT },
+					previousPage: { label: "Estafeta", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_ESTAFETA },
+					nextPage: { label: "YG Entertainment", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_YG_ENTERTAINMENT },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.YG_ENTERTAINMENT]: {
+	[PATHS.CASE_STUDIES_YG_ENTERTAINMENT]: {
 		metaData: {
 			title: "YG Entertainment Case Study",
 			description: "YG Entertainment Elevates Fan Engagement With AI-Powered Customer Experience Management.",
@@ -3557,7 +3633,7 @@ export const allPagesData: Record<string, PageShape> = {
 
 					## YG Entertainment Elevates Fan Engagement With AI-Powered Customer Experience Management.
 					`,
-					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME }, { label: "YG Entertainment" }],
+					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES }, { label: "YG Entertainment" }],
 					classNames: { innerClassName: "max-w-[700px]" },
 				},
 			},
@@ -3610,14 +3686,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Wells Fargo", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.WELLS_FARGO },
-					nextPage: { label: "Prada", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.PRADA },
+					previousPage: { label: "Wells Fargo", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_WELLS_FARGO },
+					nextPage: { label: "Prada", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_PRADA },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.PRADA]: {
+	[PATHS.CASE_STUDIES_PRADA]: {
 		metaData: {
 			title: "Prada Case Study",
 			description: "How Prada Group drives premium brand digital innovation",
@@ -3636,7 +3712,7 @@ export const allPagesData: Record<string, PageShape> = {
 
 					## How Prada Group drives premium brand digital innovation
 					`,
-					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME }, { label: "Prada" }],
+					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES }, { label: "Prada" }],
 					classNames: { innerClassName: "max-w-[680px]" },
 				},
 			},
@@ -3701,15 +3777,15 @@ export const allPagesData: Record<string, PageShape> = {
 					previousPage: {
 						label: "YG Entertainment",
 						subLabel: "Case Study:",
-						href: PATHS.CASE_STUDIES.YG_ENTERTAINMENT,
+						href: PATHS.CASE_STUDIES_YG_ENTERTAINMENT,
 					},
-					nextPage: { label: "Honda", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.HONDA },
+					nextPage: { label: "Honda", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_HONDA },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.HONDA]: {
+	[PATHS.CASE_STUDIES_HONDA]: {
 		metaData: {
 			title: "Honda Case Study",
 			description: "What Honda did to unify customer service in the new age of online auto sales",
@@ -3728,7 +3804,7 @@ export const allPagesData: Record<string, PageShape> = {
 
 					## What Honda did to unify customer service in the new age of online auto sales
 					`,
-					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME }, { label: "Honda" }],
+					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES }, { label: "Honda" }],
 					classNames: { innerClassName: "max-w-[620px]" },
 				},
 			},
@@ -3801,14 +3877,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Prada", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.PRADA },
-					nextPage: { label: "Norse", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.NORSE },
+					previousPage: { label: "Prada", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_PRADA },
+					nextPage: { label: "Norse", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_NORSE },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.NORSE]: {
+	[PATHS.CASE_STUDIES_NORSE]: {
 		metaData: {
 			title: "Norse Case Study",
 			description: "How Norse quickly introduced an omnichannel customer service program",
@@ -3827,7 +3903,7 @@ export const allPagesData: Record<string, PageShape> = {
 
 					## How Norse quickly introduced an omnichannel customer service program
 					`,
-					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME }, { label: "Norse" }],
+					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES }, { label: "Norse" }],
 					classNames: { innerClassName: "max-w-[660px]" },
 				},
 			},
@@ -3890,14 +3966,14 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Honda", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.HONDA },
-					nextPage: { label: "Aida Cruises", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.AIDA_CRUISES },
+					previousPage: { label: "Honda", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_HONDA },
+					nextPage: { label: "Aida Cruises", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_AIDA_CRUISES },
 					classNames: { sectionClassName: BLUE_BG },
 				},
 			},
 		],
 	},
-	[PATHS.CASE_STUDIES.AIDA_CRUISES]: {
+	[PATHS.CASE_STUDIES_AIDA_CRUISES]: {
 		metaData: {
 			title: "AIDA Cruises Case Study",
 			description: "How AIDA Cruises maintains love even in the face of adversity",
@@ -3916,7 +3992,7 @@ export const allPagesData: Record<string, PageShape> = {
 
 					## How AIDA Cruises maintains love even in the face of adversity
 					`,
-					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES.HOME }, { label: "AIDA Cruises" }],
+					breadcrumbPages: [{ label: "Case Studies", href: PATHS.CASE_STUDIES }, { label: "AIDA Cruises" }],
 					classNames: { innerClassName: "max-w-[630px]" },
 				},
 			},
@@ -3972,7 +4048,7 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Norse", subLabel: "Case Study:", href: PATHS.CASE_STUDIES.NORSE },
+					previousPage: { label: "Norse", subLabel: "Case Study:", href: PATHS.CASE_STUDIES_NORSE },
 					nextPage: { label: "Company", href: PATHS.COMPANY },
 					classNames: { sectionClassName: BLUE_BG },
 				},
@@ -4042,7 +4118,7 @@ export const allPagesData: Record<string, PageShape> = {
 			{
 				type: "TOGGLE_PAGE_SECTION",
 				body: {
-					previousPage: { label: "Case Studies", href: PATHS.CASE_STUDIES.HOME },
+					previousPage: { label: "Case Studies", href: PATHS.CASE_STUDIES },
 					nextPage: { label: "Contact Us!", href: PATHS.CONTACT_US },
 				},
 			},
@@ -4082,11 +4158,7 @@ export const allPagesData: Record<string, PageShape> = {
 				},
 				body: {
 					classNames: {
-						// sectionClassName: {
-						// 	// background: `#F6FBFD url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1529.913 1705.315"><defs><clipPath id="a"><path fill="%236abdea" d="M242.262 572.061c0 181.842 147.941 329.8 329.8 329.8 181.936 0 329.878-147.957 329.878-329.8 0-181.858-147.941-329.8-329.878-329.8-181.858 0-329.8 147.941-329.8 329.8M0 572.061C0 256.615 256.615 0 572.061 0S1144.2 256.615 1144.2 572.061c0 315.43-256.694 572.061-572.139 572.061S0 887.49 0 572.061" data-name="Path 1772"/></clipPath><clipPath id="b"><path fill="%236abdea" d="M149.641 299.314a149.657 149.657 0 1 1 149.673-149.642 149.644 149.644 0 0 1-149.673 149.642Z" data-name="Path 1773"/></clipPath></defs><g data-name="Group 23572" opacity=".06"><g data-name="Group 23534"><g clip-path="url(%23a)" data-name="Group 23533" transform="rotate(116 553.465 816.456)"><path fill="%236abdea" d="M219.477-450.512 1594.69 219.503l-670 1375.18L-450.521 924.67z" data-name="Rectangle 5381"/></g></g><g data-name="Group 23536"><g clip-path="url(%23b)" data-name="Group 23535" transform="rotate(116 231.973 236.175)"><path fill="%236abdea" d="M57.413-117.855 417.166 57.419 241.89 417.172-117.86 241.898z" data-name="Rectangle 5382"/></g></g></g></svg>') no-repeat 50%`,
-						// 	// backgroundSize: "80%",
-						// 	// backgroundPositionY: 40,
-						// },
+						sectionClassName: "custom-background",
 						innerClassName: "pb-[80px]",
 					},
 				},

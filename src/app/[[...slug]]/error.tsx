@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/comps"
+import { Button } from "@/comps/Button"
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
 	console.log(error)

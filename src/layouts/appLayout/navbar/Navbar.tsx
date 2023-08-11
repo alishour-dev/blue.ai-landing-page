@@ -1,12 +1,17 @@
+"use client"
+
 import type { Variants } from "framer-motion"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { twMerge } from "tailwind-merge"
 import { v4 as newId } from "uuid"
 
-import { Button, Dropdown, MotionElement, MotionLink } from "@/comps"
+import { Button } from "@/comps/Button"
+import { Dropdown } from "@/comps/Dropdown"
+import { MotionElement } from "@/comps/MotionElement"
+import { MotionLink } from "@/comps/MotionLink"
 import { PATHS } from "@/constants"
-import { slideRightBtm, transition, variantPresets } from "@/lib/framer-motion/variants"
+import { slideRightBtm, transition, variantPresets, viewport } from "@/lib/framer-motion/variants"
 import type { ImgPropsWithoutDimensions, LinkType, NestedLink } from "@/types"
 
 import { MobileView } from "./mobileView"
@@ -18,7 +23,7 @@ export declare interface NavbarProps {
 	logo: Omit<ImgPropsWithoutDimensions, "alt">
 }
 
-export const Navbar = (props: NavbarProps) => {
+export function Navbar(props: NavbarProps) {
 	const { mainMenu, cta, logo } = props
 	const pathname = usePathname()
 
@@ -28,11 +33,14 @@ export const Navbar = (props: NavbarProps) => {
 			{...variantPresets}
 			animate='animate'
 			variants={customStagger}
-			viewport={{ once: true }}
+			viewport={viewport}
 			className='glass fixed left-0 right-0 top-0 h-[60px] px-4'>
 			<nav aria-label='Global' className='mx-auto flex h-full max-w-7xl items-center justify-between'>
 				{/* Logo Section  */}
-				<MotionLink href={PATHS.HOME} {...slideRightBtm}>
+				<MotionLink
+					href={PATHS.HOME}
+					{...slideRightBtm}
+					className='rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary'>
 					<span className='sr-only'>Blue.Ai</span>
 					<Image
 						width={26}
@@ -41,7 +49,7 @@ export const Navbar = (props: NavbarProps) => {
 						quality={100}
 						src={logo.src}
 						alt='Blue.Ai Logo'
-						className='aspectRatio: 26 / 44 h-auto prevent-selection'
+						className='aspect-[26/44] h-auto prevent-selection'
 					/>
 				</MotionLink>
 
@@ -88,10 +96,11 @@ export const Navbar = (props: NavbarProps) => {
 				{/* CTA  */}
 				<Button
 					as='MotionLink'
+					passHref
 					className='!hidden h-9 rounded-[4px] px-3 text-xs font-bold md:!flex lg:px-4 lg:text-sm'
 					size='compact'
 					href={cta?.href}
-					disabled={pathname === `/${cta?.href}`}>
+					disabled={pathname === cta?.href}>
 					{cta?.label}
 				</Button>
 
@@ -112,4 +121,4 @@ const customStagger: Variants = {
 }
 
 const labelClassName =
-	"animated-underline transition-colors duration-300 after:!bg-primary text-gray-700 hover:text-primary font-semibold px-[10px] text-xs lg:px-4 lg:text-sm h-full"
+	"animated-underline transition-colors duration-300 after:!bg-primary text-gray-700 hover:text-primary font-semibold px-[10px] text-xs lg:px-4 lg:text-sm h-full rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"

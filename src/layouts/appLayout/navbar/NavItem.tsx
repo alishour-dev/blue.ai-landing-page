@@ -1,15 +1,15 @@
 "use client"
 
-import { Menu } from "@headlessui/react"
 import Link from "next/link"
 import { useMemo } from "react"
 import { twMerge } from "tailwind-merge"
 
+import { Menu } from "@/lib/headlessui/Menu"
 import type { NestedLink } from "@/types"
 
 import { navIcons } from "./icons"
 
-export const NavItem = ({ href, label, icon, subLabel }: NestedLink) => {
+export function NavItem({ href, label, icon, subLabel }: NestedLink) {
 	const Icon = useMemo(() => navIcons[icon as keyof typeof navIcons], [icon])
 
 	return (

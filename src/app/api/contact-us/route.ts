@@ -4,7 +4,7 @@ import Mail from "nodemailer/lib/mailer"
 import type { ZodError } from "zod"
 
 import { ContactSchema } from "@/lib/zod/schema"
-import { contactDataType } from "@/sections"
+import type { contactDataType } from "@/sections/ContactFormSection"
 
 function transformErrorMessages(zodIssues: ZodError<contactDataType>["issues"]): string {
 	const readableErrorsList: string[] = zodIssues.map((issue) => {
@@ -28,8 +28,6 @@ export async function POST(req: Request) {
 	if (!response.success) {
 		return NextResponse.json(transformErrorMessages(response.error.issues), { status: 500 })
 	}
-
-	// return NextResponse.json(response)
 
 	const { name, email } = response.data
 	const { BLUE_SMTP_AUTH, BLUE_SMTP_PASS, BLUE_SMTP_HOST } = process.env

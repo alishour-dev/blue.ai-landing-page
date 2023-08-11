@@ -1,53 +1,40 @@
 "use client"
 
-import { Transition } from "@headlessui/react"
-import dynamic from "next/dynamic"
 import { Fragment } from "react"
 import { twMerge } from "tailwind-merge"
 import { v4 as newId } from "uuid"
 
+import { Listbox } from "@/lib/headlessui/Listbox"
+import { Transition } from "@/lib/headlessui/Transition"
+
 import HeroiconsCheck from "~icons/heroicons/check"
 import IonIosArrowDown from "~icons/ion/ios-arrow-down"
-
-// Dynamically Importing these componenets because Nextjs is complaining about difference between client and server ids on them
-const Listbox = dynamic(() => import("@headlessui/react").then((mod) => mod.Listbox), {
-	ssr: false,
-})
-const ListboxLabel = dynamic(() => import("@headlessui/react").then((mod) => mod.Listbox).then((sub) => sub.Label), {
-	ssr: false,
-})
-const ListboxButton = dynamic(() => import("@headlessui/react").then((mod) => mod.Listbox).then((sub) => sub.Button), {
-	ssr: false,
-})
-const ListboxOptions = dynamic(
-	() => import("@headlessui/react").then((mod) => mod.Listbox).then((sub) => sub.Options),
-	{ ssr: false }
-)
-const ListboxOption = dynamic(() => import("@headlessui/react").then((mod) => mod.Listbox).then((sub) => sub.Option), {
-	ssr: false,
-})
 
 interface MultiSelectProps {
 	value: string[] | []
 	onChange: (values: string[] | []) => void
 	label: string
+	className?: string
 	placeholder?: string
 	options: string[]
 }
 
-export const MultiSelect = ({
+export function MultiSelect({
 	options,
 	value,
 	onChange,
 	label,
 	placeholder = "Select an option",
-}: MultiSelectProps) => (
-	<Listbox value={value} onChange={onChange} multiple>
-		<div className='relative w-full lg:min-w-[310px]'>
-			<ListboxLabel className='mb-1 block w-max text-sm font-semibold text-gray-800 prevent-selection'>
+	className,
+}: MultiSelectProps) {
+	return (
+		<Listbox value={value} onChange={onChange} multiple as='div' className={twMerge(className, "relative")}>
+			<Listbox.Label
+				id='multi-select-label'
+				className='mb-1 block w-max text-sm font-semibold text-gray-800 prevent-selection'>
 				{label}
-			</ListboxLabel>
-			<ListboxButton
+			</Listbox.Label>
+			<Listbox.Button
 				id={label}
 				className={({ open }: { open: boolean }) =>
 					twMerge(
@@ -60,7 +47,7 @@ export const MultiSelect = ({
 					{value?.length ? <>{value?.length} Products selected</> : placeholder}
 				</p>
 				<IonIosArrowDown className='transition-custom shrink-0 text-gray-900 will-change-transform' />
-			</ListboxButton>
+			</Listbox.Button>
 
 			<Transition
 				as={Fragment}
@@ -70,13 +57,13 @@ export const MultiSelect = ({
 				leave='transition duration-200 ease-out origin-top'
 				leaveFrom='transform scale-y-100 opacity-100'
 				leaveTo='transform scale-y-0 opacity-0'>
-				<ListboxOptions className='absolute z-40 mt-[6px] max-h-60 w-full overflow-auto rounded-md bg-white text-sm shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none'>
+				<Listbox.Options className='absolute z-40 mt-[6px] max-h-60 w-full overflow-auto rounded-md bg-white text-sm shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none'>
 					{options.map((option) => (
-						<ListboxOption
+						<Listbox.Option
 							key={newId()}
 							id={newId()}
 							value={option}
-							className={({ active, selected }: Record<"active" | "selected", boolean>) =>
+							className={({ active, selected }) =>
 								twMerge(
 									"transition-custom relative flex cursor-pointer select-none items-center justify-between p-3",
 									(active || selected) && "bg-primary-50 bg-opacity-50"
@@ -90,10 +77,10 @@ export const MultiSelect = ({
 									{selected ? <HeroiconsCheck className='h-5 w-5 text-primary-800' aria-hidden='true' /> : null}
 								</>
 							)}
-						</ListboxOption>
+						</Listbox.Option>
 					))}
-				</ListboxOptions>
+				</Listbox.Options>
 			</Transition>
-		</div>
-	</Listbox>
-)
+		</Listbox>
+	)
+}

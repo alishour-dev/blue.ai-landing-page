@@ -3,43 +3,25 @@ import { useMemo } from "react"
 import { twMerge } from "tailwind-merge"
 import { v4 as newId } from "uuid"
 
-import { MotionElement } from "@/comps"
+import { MotionElement } from "@/comps/MotionElement"
 import { basicStagger } from "@/lib/framer-motion/variants"
-import {
-	AccordionFlexSection,
-	AttributesCardsSection,
-	BlogSection,
-	CardsCarouselSection,
-	ContactFormSection,
-	DualSections,
-	FeaturesCardsSection,
-	FlexSection,
-	HeroSection,
-	ImageSection,
-	SlidesCarouselSection,
-	InfoCardsSection,
-	MapSection,
-	MarqueeSection,
-	PageHeaderSection,
-	StatsSection,
-	TogglePageSection,
-	type AccordionFlexSectionData,
-	type AttributesCardsSectionData,
-	type BlogSectionData,
-	type CardsCarouselSectionData,
-	type DualSectionsData,
-	type FeaturesCardsSectionData,
-	type FlexSectionData,
-	type HeroSectionData,
-	type ImageSectionData,
-	type InfoCardsSectionData,
-	type MapSectionData,
-	type MarqueeSectionData,
-	type PageHeaderSectionData,
-	type SlidesCarouselData,
-	type StatsSectionData,
-	type TogglePageSectionData,
-} from "@/sections"
+import { AccordionFlexSection, type AccordionFlexSectionData } from "@/sections/AccordionFlexSection"
+import { AttributesCardsSection, type AttributesCardsSectionData } from "@/sections/attributesCardsSection"
+import { BlogSection, type BlogSectionData } from "@/sections/blogSection"
+import { CardsCarouselSection, type CardsCarouselSectionData } from "@/sections/cardsCarouselSection"
+import { ContactFormSection } from "@/sections/ContactFormSection"
+import { DualSections, type DualSectionsData } from "@/sections/DualSections"
+import { FeaturesCardsSection, type FeaturesCardsSectionData } from "@/sections/featuresCardsSection"
+import { FlexSection, type FlexSectionData } from "@/sections/FlexSection"
+import { HeroSection, type HeroSectionData } from "@/sections/HeroSection"
+import { ImageSection, type ImageSectionData } from "@/sections/ImageSection"
+import { InfoCardsSection, type InfoCardsSectionData } from "@/sections/InfoCardsSection"
+import { MapSection, type MapSectionData } from "@/sections/MapSection"
+import { MarqueeSection, type MarqueeSectionData } from "@/sections/marqueeSection"
+import { PageHeaderSection, type PageHeaderSectionData } from "@/sections/PageHeaderSection"
+import { type SlidesCarouselData, SlidesCarouselSection } from "@/sections/SlidesCarouselSection"
+import { StatsSection, type StatsSectionData } from "@/sections/StatsSection"
+import { TogglePageSection, type TogglePageSectionData } from "@/sections/togglePageSection"
 
 const Header = dynamic(() => import("./Header").then((mod) => mod.Header))
 const Footer = dynamic(() => import("./Footer").then((mod) => mod.Footer))
@@ -137,15 +119,14 @@ export function Section({ type, header, body, footer }: SectionProps[SectionType
 				body?.classNames?.sectionClassName,
 				type === "PAGE_HEADER_SECTION" && "h-max min-h-[371px] !py-0",
 				type === "MAP_SECTION" && "gap-[50px] md:gap-[70px] lg:gap-8",
-				type === "HERO_SECTION" && "baseHeight:min-h-[calc(100vh-60px)]"
+				(type === "HERO_SECTION" || type === "CARDS_CAROUSEL_SECTION") && "baseHeight:min-h-[calc(100vh-60px)]"
 			)}>
 			{!!header?.content.length && <Header {...header} />}
 
 			{!!Component && (
 				<MotionElement
 					key={newId()}
-					{...basicStagger({ staggerChildren: 0.2 })}
-					viewport={{ once: true }}
+					{...basicStagger({ staggerChildren: 0.1 })}
 					className={twMerge(
 						"inner-wrapper mx-auto w-full max-w-[1920px] flex-1",
 						body?.classNames?.innerClassName,
@@ -153,9 +134,9 @@ export function Section({ type, header, body, footer }: SectionProps[SectionType
 						type === "FLEX_SECTION" && "cards" in body && "flex-col gap-14 flex-center md:gap-6 lg:gap-16",
 						type === "DUAL_SECTIONS" && "w-full flex-col gap-14 !px-0 flex-center",
 						type === "STATS_SECTION" && "flex-col gap-12 flex-center md:flex-row md:justify-between md:gap-6",
-						type === "BLOG_SECTION" && "flex-col flex-wrap gap-10 flex-center sm:flex-row-reverse",
+						type === "BLOG_SECTION" && "flex flex-col flex-wrap items-start justify-center gap-10 sm:flex-row-reverse",
 						type === "SLIDES_CAROUSEL_SECTION" && "px-4 sm:!px-0",
-						type === "CARDS_CAROUSEL_SECTION" && "overflow-hidden pb-24",
+						type === "CARDS_CAROUSEL_SECTION" && "overflow-hidden pb-24 pt-2",
 						type === "PAGE_HEADER_SECTION" && "flex-col px-4 py-2 flex-center",
 						type === "TOGGLE_PAGE_SECTION" && "mx-auto flex !max-w-[800px] justify-between gap-6",
 						type === "MAP_SECTION" &&

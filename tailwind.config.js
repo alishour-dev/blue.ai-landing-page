@@ -117,6 +117,9 @@ module.exports = {
 				baseHeight: { raw: "(max-height: 1000px)" },
 				// => @media (max-height: 1000px) { ... }
 			},
+			boxShadow: {
+				custom: "0px 0px 10px #0000001A",
+			},
 		},
 		screens: {
 			"2xs": "400px",

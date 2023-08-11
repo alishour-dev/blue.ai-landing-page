@@ -4,7 +4,7 @@ A Nextjs Application representing [Blue.AI](https://blue.ai) official Landing Pa
 
 ## Table of Contents
 
-- [Setup](#Setup)
+- [Setup](#setup)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -27,21 +27,21 @@ To order to install and run project smoothly, please make sure to have the follo
 
 1. Clone the repository:
 
-```bash
-git clone https://gitlab.com/a10179/omni-channel/frontend/blue.ai-frontend.git
-```
+   ```bash
+   git clone https://gitlab.com/a10179/omni-channel/frontend/blue.ai-frontend.git
+   ```
 
 2. Install all the dependencies needed:
 
-```bash
-pnpm i
-```
+   ```bash
+   pnpm i
+   ```
 
 3. Run the development server:
 
-```bash
-pnpm dev
-```
+   ```bash
+   pnpm dev
+   ```
 
 4. Open [http://localhost:3000](http://localhost:3000) with the browser to see the result.
 
@@ -57,13 +57,13 @@ Next, we have to add additional configuration for the SMTP server:
 
 2. Add the following environment variables to the file:
 
-```
-SMTP_HOST=our_smtp_host
-SMTP_AUTH=our_smtp_auth
-SMTP_PASS=our_smtp_password
-```
+   ```bash
+   SMTP_HOST=our_smtp_host
+   SMTP_AUTH=our_smtp_auth
+   SMTP_PASS=our_smtp_password
+   ```
 
-Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the actual values provided by our SMTP server provider.
+   Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the actual values provided by our SMTP server provider.
 
 3. Save the `.env.local` file.
 
@@ -78,7 +78,6 @@ In the project directory, you can run the following scripts:
 - `pnpm dev`: Starts the Next.js development server.
 - `pnpm dev:clean`: Cleans cache and re-installs modules, then Starts a clean Next.js development server.
 - `pnpm build`: Builds the production-ready optimized version of the Next.js project.
-- `pnpm postbuild`: Generates a sitemap after the build process. (Requires next-sitemap package to be installed)
 - `pnpm start`: Starts the production server.
 - `pnpm cy:open`: Open Cypress Test Runner for interactive test execution and debugging.
 - `pnpm cy:run`: Run Cypress tests in headless mode, suitable for automated testing and CI environments.
@@ -100,15 +99,15 @@ Next, we can test a local verison for a production build by following these step
 
 1. Build The project:
 
-```
-pnpm run build
-```
+   ```bash
+   pnpm run build
+   ```
 
 2. Start server:
 
-```
-pnpm run start
-```
+   ```bash
+   pnpm run start
+   ```
 
 3. Open [http://localhost:3000](http://localhost:3000) with the browser to see production built verison
 
@@ -124,11 +123,11 @@ pnpm run start
 
 5. Add the following environment variables:
 
-- Variable: `SMTP_HOST`, Value: `our_smtp_host`
-- Variable: `SMTP_AUTH`, Value: `our_smtp_auth`
-- Variable: `SMTP_PASS`, Value: `our_smtp_password`
+   - Variable: `SMTP_HOST`, Value: `our_smtp_host`
+   - Variable: `SMTP_AUTH`, Value: `our_smtp_auth`
+   - Variable: `SMTP_PASS`, Value: `our_smtp_password`
 
-Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the actual values provided by our SMTP server provider.
+   Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the actual values provided by our SMTP server provider.
 
 6. Save the environment variables.
 
@@ -142,3 +141,6 @@ To read Next.js documentation, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn/foundations/about-nextjs) - an interactive Next.js tutorial.
+
+<!-- Handling focus state -->
+<!-- rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary -->

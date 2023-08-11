@@ -25,6 +25,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(({ slides, img
 							loading='lazy'
 							placeholder='blur'
 							blurDataURL={blurDataURL}
+							style={{ aspectRatio: imgProps.width / imgProps.height }}
 							className={twMerge(
 								"mx-auto block h-auto max-w-full object-cover md:h-[var(--slide-height)]",
 								imgProps?.className

@@ -5,14 +5,16 @@ import { useState } from "react"
 import { twMerge } from "tailwind-merge"
 import { v4 as newId } from "uuid"
 
-import { Accordion, Button, SideBar } from "@/comps"
+import { Accordion } from "@/comps/Accordion"
+import { Button } from "@/comps/Button"
+import { SideBar } from "@/comps/SideBar"
 
 import type { NavbarProps } from "../Navbar"
 
 import { NavItem } from "./NavItem"
 
 // Mobile Menu (Burger button + Sidebar) - ONLY VISIBLE ON MOBILE
-export const MobileView = ({ mainMenu, cta }: NavbarProps) => {
+export function MobileView({ mainMenu, cta }: NavbarProps) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
 	return (
@@ -20,7 +22,7 @@ export const MobileView = ({ mainMenu, cta }: NavbarProps) => {
 			<button
 				type='button'
 				onClick={() => setMobileMenuOpen(true)}
-				className='relative -m-2.5 h-[38px] w-[38px] rounded-md ring-0 flex-center md:hidden'>
+				className='relative -m-2.5 h-[38px] w-[38px] rounded-md ring-0 flex-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary md:hidden'>
 				<span className='sr-only'>{mobileMenuOpen ? "Open menu" : "Close menu"}</span>
 				<div className='flex h-[18px] w-[20px] origin-center transform flex-col justify-between transition-all duration-300'>
 					<div
@@ -66,7 +68,7 @@ export const MobileView = ({ mainMenu, cta }: NavbarProps) => {
 										href={href as string}
 										key={label + "-" + idx}
 										className={twMerge(
-											"transition-custom m-0 -mx-3 block rounded-lg text-base font-semibold hover:bg-gray-50",
+											"transition-custom m-0 -mx-3 block rounded-lg text-base font-semibold hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary",
 											linkTargetClassName
 										)}>
 										{label}

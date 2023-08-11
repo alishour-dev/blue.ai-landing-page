@@ -37,7 +37,7 @@ export type ButtonProps<T extends ButtonType> = {
 } & ElementProps<T> &
 	Partial<Record<"leftIcon" | "rightIcon", React.ReactNode>>
 
-export const Button = <T extends ButtonType>({
+export function Button<T extends ButtonType>({
 	as = "button",
 	leftIcon,
 	rightIcon,
@@ -47,7 +47,7 @@ export const Button = <T extends ButtonType>({
 	disabled,
 	children,
 	...props
-}: ButtonProps<T>) => {
+}: ButtonProps<T>) {
 	const Element = useMemo<React.ElementType>(
 		() =>
 			as === "a"
@@ -69,9 +69,10 @@ export const Button = <T extends ButtonType>({
 			data-variant={variant !== "none" ? variant : null}
 			disabled={disabled || loading}
 			className={twMerge(
-				`btn transition-custom overflow-hidden will-change-[transform,brightness] prevent-selection flex-center hover:brightness-[1.03] active:scale-[98%] disabled:pointer-events-none disabled:opacity-70`,
+				`btn transition-custom gap-2 overflow-hidden will-change-[transform,brightness] prevent-selection flex-center hover:brightness-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[98%]`,
 				props?.className,
-				loading && "relative"
+				(disabled || loading) && "pointer-events-none relative",
+				disabled && "!bg-opacity-60"
 			)}>
 			{leftIcon && leftIcon}
 			{children}

@@ -10,6 +10,9 @@
 
 	button {
 		@apply outline-none;
+		&:disabled {
+			@apply !pointer-events-none !opacity-70;
+		}
 	}
 }
 
@@ -73,9 +76,7 @@
 		@apply relative z-10;
 
 		&::before {
-			@apply absolute left-0 top-0 z-[-1] h-full w-full animate-blur-in content-[""];
-
-			background: rgba(240, 240, 240, 0.5);
+			@apply absolute left-0 top-0 z-[-1] h-full w-full animate-blur-in bg-[rgba(240,240,240,0.5)] content-[""];
 		}
 	}
 
@@ -101,16 +102,27 @@
 	.common-h2 {
 		@apply text-[18px] font-bold leading-[22px] text-primary md:text-[20px] md:leading-[24px] lg:text-[25px] lg:leading-[32px];
 	}
-
 	.common-h3 {
 		@apply mb-2 w-full text-[17px] leading-[20px] md:mb-3 md:text-[18px] md:leading-[22px] lg:mb-0 lg:text-[20px] lg:leading-[24px];
 	}
-
 	.common-p {
 		@apply text-[15px] leading-[17px] text-[#96999C] md:text-base md:leading-[18px] lg:text-lg lg:leading-[22px];
 	}
-
 	.label-underline {
 		@apply relative before:absolute before:-bottom-2 before:left-0 before:h-[2px] before:w-[80%] before:max-w-[60px] before:bg-current before:content-[''];
+	}
+
+	.custom-background {
+		background: #f6fbfd
+			url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1529.913 1705.315"><defs><clipPath id="a"><path fill="%236abdea" d="M242.262 572.061c0 181.842 147.941 329.8 329.8 329.8 181.936 0 329.878-147.957 329.878-329.8 0-181.858-147.941-329.8-329.878-329.8-181.858 0-329.8 147.941-329.8 329.8M0 572.061C0 256.615 256.615 0 572.061 0S1144.2 256.615 1144.2 572.061c0 315.43-256.694 572.061-572.139 572.061S0 887.49 0 572.061" data-name="Path 1772"/></clipPath><clipPath id="b"><path fill="%236abdea" d="M149.641 299.314a149.657 149.657 0 1 1 149.673-149.642 149.644 149.644 0 0 1-149.673 149.642Z" data-name="Path 1773"/></clipPath></defs><g data-name="Group 23572" opacity=".06"><g data-name="Group 23534"><g clip-path="url(%23a)" data-name="Group 23533" transform="rotate(116 553.465 816.456)"><path fill="%236abdea" d="M219.477-450.512 1594.69 219.503l-670 1375.18L-450.521 924.67z" data-name="Rectangle 5381"/></g></g><g data-name="Group 23536"><g clip-path="url(%23b)" data-name="Group 23535" transform="rotate(116 231.973 236.175)"><path fill="%236abdea" d="M57.413-117.855 417.166 57.419 241.89 417.172-117.86 241.898z" data-name="Rectangle 5382"/></g></g></g></svg>')
+			no-repeat 50%;
+		background-size: 80%;
+		background-position-y: 40;
+	}
+	.custom-background-small {
+		background: #f6fbfd
+			url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="659"><defs><clipPath id="a"><path fill="%23f6fbfd" d="M0 469h1920v659H0Z" data-name="Path 51787"/></clipPath><clipPath id="b"><path fill="%236abdea" d="M164.955 389.515c0-123.816 100.733-224.559 224.559-224.559 123.88 0 224.613 100.744 224.613 224.559S513.395 614.074 389.515 614.074c-123.826 0-224.559-100.733-224.559-224.559M0 389.515C0 604.3 174.729 779.03 389.515 779.03S779.083 604.3 779.083 389.515 604.3 0 389.515 0 0 174.739 0 389.515" data-name="Path 1772"/></clipPath><clipPath id="c"><path fill="%236abdea" d="M101.89 0A101.9 101.9 0 1 0 203.8 101.89 101.892 101.892 0 0 0 101.89 0Z" data-name="Path 1773"/></clipPath></defs><g clip-path="url(%23a)" data-name="Mask Group 21" transform="translate(0 -469)"><g data-name="Group 69447" opacity=".06"><g data-name="Group 23534"><g clip-path="url(%23b)" data-name="Group 23533" transform="scale(-1) rotate(-82 -997.936 413.903)"><path fill="%236abdea" d="m-306.727 149.436 936.38-456.212 456.2 936.357-936.38 456.212z" data-name="Rectangle 5381"/></g></g><g data-name="Group 23536"><g clip-path="url(%23c)" data-name="Group 23535" transform="scale(-1) rotate(-82 -1086.983 531.977)"><path fill="%236abdea" d="M-80.243 39.097 164.712-80.247l119.344 244.955L39.101 284.052z" data-name="Rectangle 5382"/></g></g></g></g></svg>')
+			no-repeat;
+		background-size: cover;
 	}
 }

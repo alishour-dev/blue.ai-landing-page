@@ -2,13 +2,18 @@
 
 import { useCallback, useMemo, useState } from "react"
 
-import { Button, TextInput, PhoneNumberInput, MultiSelect, TextArea, MotionElement } from "@/comps"
+import { Button } from "@/comps/Button"
+import { MotionElement } from "@/comps/MotionElement"
+import { MultiSelect } from "@/comps/MultiSelect"
+import { PhoneNumberInput } from "@/comps/phoneNumberInput"
+import { TextArea } from "@/comps/TextArea"
+import { TextInput } from "@/comps/TextInput"
 import { useNotifications, type NotificationWithoutIdType } from "@/context/notifications"
 import { scaleUp } from "@/lib/framer-motion/variants"
 
 import IonIosSend from "~icons/ion/ios-send"
 
-export const ContactFormSection = () => {
+export function ContactFormSection() {
 	const [loading, setLoading] = useState(false)
 	const [data, setData] = useState<contactDataType>(initialData)
 
@@ -17,7 +22,12 @@ export const ContactFormSection = () => {
 	// Boolean that returns false if the data needed to be submitted is Invalid
 	// (No name, email, phone number, company name, or message field was/were passed, as well as checking validity of phone number)
 	const isInvalid = useMemo(
-		() => !data?.name || !data?.email || !data?.phoneNumber || !data?.companyName || !data?.message,
+		() =>
+			!data?.name ||
+			!data?.email ||
+			data?.phoneNumber?.replace(/[\s]+/g, "") === "+1" ||
+			!data?.companyName ||
+			!data?.message,
 		// || (!!data?.phoneNumber?.length && !isPossiblePhoneNumber(data?.phoneNumber))
 		[data]
 	)
@@ -57,10 +67,10 @@ export const ContactFormSection = () => {
 	return (
 		<MotionElement
 			as='form'
-			className='mx-auto flex max-w-max flex-col gap-4 rounded-xl bg-white p-3 shadow-[0_0_12px_0_rgba(0,0,0,0.12)] sm:p-[18px]'
+			className='mx-auto flex max-w-[400px] flex-col gap-4 rounded-xl bg-white p-3 shadow-custom sm:max-w-max sm:p-[18px]'
 			onSubmit={handleSubmit}
 			{...scaleUp}>
-			<div className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
+			<div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2'>
 				<TextInput
 					name='name'
 					label='Full name'
@@ -69,6 +79,7 @@ export const ContactFormSection = () => {
 					value={data?.name}
 					onChange={updateValue}
 					spellCheck={false}
+					className='w-full lg:min-w-[310px]'
 				/>
 				<TextInput
 					name='email'
@@ -79,10 +90,13 @@ export const ContactFormSection = () => {
 					value={data?.email}
 					onChange={updateValue}
 					spellCheck={false}
+					className='w-full lg:min-w-[310px]'
 				/>
 				<PhoneNumberInput
+					required
 					value={data?.phoneNumber}
 					onChange={(phoneNumber: string) => setData((prev) => ({ ...prev, phoneNumber }))}
+					className='w-full lg:min-w-[310px]'
 				/>
 				<TextInput
 					name='companyName'
@@ -91,14 +105,23 @@ export const ContactFormSection = () => {
 					required
 					value={data?.companyName}
 					onChange={updateValue}
+					className='w-full lg:min-w-[310px]'
 				/>
-				<TextInput name='role' label='Role' placeholder='Enter your role' value={data?.role} onChange={updateValue} />
+				<TextInput
+					name='role'
+					label='Role'
+					placeholder='Enter your role'
+					value={data?.role}
+					onChange={updateValue}
+					className='w-full lg:min-w-[310px]'
+				/>
 				<MultiSelect
 					value={data?.interestedIn}
 					onChange={(interestedIn) => setData((prev) => ({ ...prev, interestedIn }))}
 					label='Interested In'
 					options={interestedInOptions}
 					placeholder='Select product(s) of your interest'
+					className='w-full lg:min-w-[310px]'
 				/>
 			</div>
 
@@ -117,7 +140,7 @@ export const ContactFormSection = () => {
 				className='group min-h-[42px] w-full cursor-pointer self-end rounded-md px-3 text-xl text-white flex-center sm:w-max'
 				disabled={isInvalid}
 				loading={loading}>
-				<div className='transition-custom mr-1 h-max w-max group-hover:translate-x-6 group-hover:rotate-[35deg]'>
+				<div className='transition-custom mr-1 h-max w-max group-hover:translate-x-[26px] group-hover:rotate-[35deg]'>
 					<IonIosSend className='transition-custom text-lg group-hover:animate-fly' />
 				</div>
 				<span className='transition-custom font-bold group-hover:translate-x-14'>Send</span>

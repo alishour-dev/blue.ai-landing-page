@@ -6,7 +6,7 @@ import { v4 as newId } from "uuid"
 
 import { fade } from "@/lib/framer-motion/variants"
 
-export const AnimatedNumberString = ({ value, duration }: { value: string; duration?: number }) => {
+export function AnimatedNumberString({ value, duration }: { value: string; duration?: number }) {
 	const groups = value.split(/(\d+)/)
 	// split the string into an array of groups of consecutive numbers and non-numbers
 	return (
@@ -33,7 +33,7 @@ export const AnimatedNumberString = ({ value, duration }: { value: string; durat
 	)
 }
 
-const CustomCount = ({ children, duration = 3 }: { children: string; duration?: number }) => {
+function CustomCount({ children, duration = 3 }: { children: string; duration?: number }) {
 	const count = useMotionValue(0)
 	const rounded = useTransform(count, Math.round)
 

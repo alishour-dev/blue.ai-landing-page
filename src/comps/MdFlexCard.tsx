@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { twMerge } from "tailwind-merge"
 
-import { MarkdownWrapper } from "@/layouts"
+import { MarkdownWrapper } from "@/layouts/MarkdownWrapper"
 import { slideLeftUp, slideRightUp } from "@/lib/framer-motion/variants"
 
 import { FlexCard, type FlexCardProps } from "./FlexCard"
@@ -13,7 +13,7 @@ export interface MdCardProps extends FlexCardProps {
 	id?: string
 }
 
-export const MdFlexCard = ({ content, textSectionClassName, imgProps, flexDirection, id }: MdCardProps) => {
+export function MdFlexCard({ content, textSectionClassName, imgProps, flexDirection, id }: MdCardProps) {
 	const textAnimationVariant = useMemo(
 		() => (flexDirection === "flex-row-reverse" ? slideLeftUp : slideRightUp),
 		[flexDirection]
@@ -21,7 +21,7 @@ export const MdFlexCard = ({ content, textSectionClassName, imgProps, flexDirect
 
 	return (
 		<FlexCard imgProps={imgProps} flexDirection={flexDirection} id={id} className='!overflow-visible'>
-			<div className={twMerge("max-w-full", textSectionClassName)}>
+			<div className={twMerge("max-w-max", textSectionClassName)}>
 				<MarkdownWrapper
 					components={{
 						ol: ({ children, depth, start }) => (

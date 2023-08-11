@@ -26,7 +26,7 @@ const NotificationsProvider = createContext<NotificationsContextTypes>({
 	dismissNotification: () => {},
 })
 
-export const NotificationsContext = ({ children }: { children: React.ReactNode }) => {
+export function NotificationsContext({ children }: { children: React.ReactNode }) {
 	const [notifications, setNotifications] = useState<NotificationType[] | []>([])
 
 	const addNotification = useCallback((notification: NotificationWithoutIdType) => {

@@ -7,9 +7,11 @@ import IonIosArrowForward from "~icons/ion/ios-arrow-forward"
 
 export type TogglePageSectionData = Record<"previousPage" | "nextPage", ToggleButtonData>
 
-export const TogglePageSection = ({ previousPage, nextPage }: TogglePageSectionData) => (
-	<>
-		<ToggleButton {...previousPage} variant={slideRightUp} Icon={IonIosArrowBack} />
-		<ToggleButton {...nextPage} direction='flex-row-reverse' variant={slideLeftUp} Icon={IonIosArrowForward} />
-	</>
-)
+export function TogglePageSection({ previousPage, nextPage }: TogglePageSectionData) {
+	return (
+		<>
+			<ToggleButton {...previousPage} variant={slideRightUp} Icon={IonIosArrowBack} />
+			<ToggleButton {...nextPage} direction='flex-row-reverse' variant={slideLeftUp} Icon={IonIosArrowForward} />
+		</>
+	)
+}

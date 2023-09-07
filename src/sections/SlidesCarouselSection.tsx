@@ -32,7 +32,7 @@ export function SlidesCarouselSection({ slides }: SlidesCarouselData) {
 				ref={emblaRef}
 				// eslint-disable-next-line prettier/prettier
 				className='relative p-1 pt-1.5 [--slide-height:290px] [--slide-size:100%] [--slide-spacing:12px] md:[--slide-size:55%] md:[--slide-spacing:40px]'
-				imgProps={{ width: 826, height: 290, className: "rounded-[28px] shadow-custom" }}
+				imgProps={{ width: 826, height: 290, className: "rounded-[28px] shadow-custom min-h-[180px] xs:min-h-[200px]" }}
 				{...slideUp}>
 				<div className='mb-6 mt-4 gap-2 flex-center sm:mb-8 sm:mt-6'>
 					{scrollSnaps.map((_, index) => (

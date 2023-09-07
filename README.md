@@ -10,15 +10,17 @@ A Nextjs Application representing [Blue.AI](https://blue.ai) official Landing Pa
 - [Configuration](#configuration)
 - [Available Scripts](#scripts)
 - [Deployment](#deployment)
-- [Nextjs Docs](#docs)
+- [Issues](#issues)
 
 ## Setup
 
-This project is built with Next.js, Typescript, Tailwindcss, Nodemailer for SMTP emails, and Framer Motion for animations.
+This project is built with Next.js, Typescript, Tailwindcss, Nodemailer for SMTP
+emails, and Framer Motion for animations.
 
 ## Prerequisites
 
-To order to install and run project smoothly, please make sure to have the following installed:
+To order to install and run project smoothly, please make sure to have the following
+installed:
 
 - Node.js (version 18.0.0 or higher)
 - pnpm package manager
@@ -43,13 +45,16 @@ To order to install and run project smoothly, please make sure to have the follo
    pnpm dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) with the browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with the browser to see
+   the result.
 
 ## Configuration
 
-To configure project correctly, create a new `.env.local` file and add the following variables:
+To configure project correctly, create a new `.env.local` file and add the
+following variables:
 
-- `BASE_URL`: Base url for Live website (production), used for seo configuration in the project
+- `BASE_URL`: Base url for Live website (production), used for seo configuration
+  in the project
 
 Next, we have to add additional configuration for the SMTP server:
 
@@ -63,7 +68,8 @@ Next, we have to add additional configuration for the SMTP server:
    SMTP_PASS=our_smtp_password
    ```
 
-   Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the actual values provided by our SMTP server provider.
+   Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the
+   actual values provided by our SMTP server provider.
 
 3. Save the `.env.local` file.
 
@@ -76,11 +82,13 @@ Next, we have to add additional configuration for the SMTP server:
 In the project directory, you can run the following scripts:
 
 - `pnpm dev`: Starts the Next.js development server.
-- `pnpm dev:clean`: Cleans cache and re-installs modules, then Starts a clean Next.js development server.
+- `pnpm dev:clean`: Cleans cache and re-installs modules, then Starts a clean
+  Next.js development server.
 - `pnpm build`: Builds the production-ready optimized version of the Next.js project.
 - `pnpm start`: Starts the production server.
 - `pnpm cy:open`: Open Cypress Test Runner for interactive test execution and debugging.
-- `pnpm cy:run`: Run Cypress tests in headless mode, suitable for automated testing and CI environments.
+- `pnpm cy:run`: Run Cypress tests in headless mode, suitable for automated
+  testing and CI environments.
 - `pnpm lint`: Runs the Next.js linter to check for code style and formatting issues.
 - `pnpm check-types`: Checks TypeScript types without emitting any files.
 - `pnpm check-all`: Runs the linting and type checking scripts.
@@ -91,7 +99,9 @@ In the project directory, you can run the following scripts:
 
 ### Checking For Bugs
 
-In order to deploy the project, we have to make sure that the project is bug-free, without linting issues, by running `pnpm check-all` to check for linting and Typescript errors.
+In order to deploy the project, we have to make sure that the project is bug-free,
+without linting issues, by running `pnpm check-all` to check for linting and
+Typescript errors.
 
 ### Building Locally
 
@@ -109,13 +119,16 @@ Next, we can test a local verison for a production build by following these step
    pnpm run start
    ```
 
-3. Open [http://localhost:3000](http://localhost:3000) with the browser to see production built verison
+3. Open [http://localhost:3000](http://localhost:3000) with the browser to see
+   production built verison
 
 ### Deploying to Vercel
 
 1. Log in to the Vercel dashboard.
 
-2. Connect Vercel to the repo of the project, Which automatically builds and deploys project (Master branch) and anytime we Push to Master branch. Pushing to any other branch creates a Preview deployment useful for testing.
+2. Connect Vercel to the repo of the project, Which automatically builds and
+   deploys project (Master branch) and anytime we Push to Master branch. Pushing
+   to any other branch creates a Preview deployment useful for testing.
 
 3. Go to project settings.
 
@@ -127,20 +140,53 @@ Next, we can test a local verison for a production build by following these step
    - Variable: `SMTP_AUTH`, Value: `our_smtp_auth`
    - Variable: `SMTP_PASS`, Value: `our_smtp_password`
 
-   Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the actual values provided by our SMTP server provider.
+   Replace `our_smtp_host`, `our_smtp_auth`, and `our_smtp_password` with the
+   actual values provided by our SMTP server provider.
 
 6. Save the environment variables.
 
-7. Vercel will redeploy the project with the updated environment variables, enabling the SMTP server configuration for the production environment.
+7. Vercel will redeploy the project with the updated environment variables,
+   enabling the SMTP server configuration for the production environment.
 
-8. The project is now configured to use the provided SMTP server for sending emails in the production environment.
-
-## Docs
-
-To read Next.js documentation, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn/foundations/about-nextjs) - an interactive Next.js tutorial.
+8. The project is now configured to use the provided SMTP server for sending
+   emails in the production environment.
 
 <!-- Handling focus state -->
-<!-- rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary -->
+<!-- rounded-md focus-visible:outline focus-visible:outline-2
+focus-visible:outline-offset-2 focus-visible:outline-primary -->
+
+## Issues
+
+1. Solving Issue With Listbox and server actions:
+
+   The Headless UI Listbox component does not use a native HTML `<select>` element,
+   but rather a custom `<div>` element with role="listbox" and aria-labelledby
+   attributes. This means that the Listbox component is not recognized as a form
+   control by the browser, and therefore its value is not sent along with the
+   form submission.
+   One possible solution is to use a hidden input element inside your form, and sync
+   its value with the selected option of the Listbox component using the onChange
+   prop.
+   For example:
+
+   ```typescript
+   import { Listbox } from "@headlessui/react"
+
+   function MyForm() {
+   	const [selected, setSelected] = useState(options[0])
+
+   	return (
+   		<form action='/api/hello' method='POST'>
+   			<Listbox value={selected} onChange={setSelected}>
+   				{/* Listbox elements */}
+   			</Listbox>
+   			<input type='hidden' name='listboxValue' value={selected.value} />
+   			<button type='submit'>Submit</button>
+   		</form>
+   	)
+   }
+   ```
+
+   This way, you can send the value of the Listbox component as a hidden input named
+   listboxValue to your Server Action URL. You can access it from the request body
+   in your API route.

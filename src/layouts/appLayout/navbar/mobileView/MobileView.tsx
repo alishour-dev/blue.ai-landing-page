@@ -44,43 +44,41 @@ export function MobileView({ mainMenu, cta }: NavbarProps) {
 			</button>
 
 			<SideBar open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} className='md:hidden'>
-				<div className='mt-6 flow-root'>
-					<div className='-my-6 divide-y divide-gray-500/10'>
-						<div className='space-y-2 py-6'>
-							{mainMenu?.map(({ label, href, nested }, idx) => {
-								if (Array.isArray(nested))
-									return (
-										<Accordion
-											id={label + "-" + idx}
-											key={label + "-" + idx}
-											className='-mx-3'
-											label={label}
-											targetProps={{ className: linkTargetClassName }}
-											panelProps={{ className: "mt-0 pl-0" }}>
-											{nested.map((item) => (
-												<NavItem key={newId()} {...item} />
-											))}
-										</Accordion>
-									)
-
+				<div className='flex h-full flex-col justify-between gap-4 divide-y divide-gray-500/10'>
+					<div className='h-full flex-1 space-y-2 overflow-y-auto overflow-x-hidden px-4'>
+						{mainMenu?.map(({ label, href, nested }, idx) => {
+							if (Array.isArray(nested))
 								return (
-									<Link
-										href={href as string}
+									<Accordion
+										id={label + "-" + idx}
 										key={label + "-" + idx}
-										className={twMerge(
-											"transition-custom m-0 -mx-3 block rounded-lg text-base font-semibold hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary",
-											linkTargetClassName
-										)}>
-										{label}
-									</Link>
+										className='-mx-3'
+										label={label}
+										targetProps={{ className: linkTargetClassName }}
+										panelProps={{ className: "mt-0 pl-0" }}>
+										{nested.map((item) => (
+											<NavItem key={newId()} {...item} />
+										))}
+									</Accordion>
 								)
-							})}
-						</div>
-						<div className='py-6'>
-							<Button as='MotionLink' href={cta?.href} className='rounded-md'>
-								{cta?.label}
-							</Button>
-						</div>
+
+							return (
+								<Link
+									href={href as string}
+									key={label + "-" + idx}
+									className={twMerge(
+										"transition-custom m-0 -mx-3 block rounded-lg text-base font-semibold hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary",
+										linkTargetClassName
+									)}>
+									{label}
+								</Link>
+							)
+						})}
+					</div>
+					<div className='pt-6'>
+						<Button as='MotionLink' href={cta?.href} className='mx-auto max-w-[340px] rounded-md'>
+							{cta?.label}
+						</Button>
 					</div>
 				</div>
 			</SideBar>

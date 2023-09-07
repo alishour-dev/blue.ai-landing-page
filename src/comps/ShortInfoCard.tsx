@@ -26,7 +26,8 @@ export function ShortInfoCard({ label, content, imgProps, className }: ShortInfo
 				alt={imgProps.alt}
 				placeholder='blur'
 				blurDataURL={imgProps.blurDataURL}
-				style={{ height: "30%" }}
+				className='aspect-[106/106] h-[30%]'
+				// style={{ aspectRatio:  }}
 				{...scaleUp}
 				sizes='106px'
 			/>

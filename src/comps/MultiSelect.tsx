@@ -12,6 +12,7 @@ import IonIosArrowDown from "~icons/ion/ios-arrow-down"
 
 interface MultiSelectProps {
 	value: string[] | []
+	name?: string
 	onChange: (values: string[] | []) => void
 	label: string
 	className?: string
@@ -22,13 +23,14 @@ interface MultiSelectProps {
 export function MultiSelect({
 	options,
 	value,
+	name,
 	onChange,
 	label,
 	placeholder = "Select an option",
 	className,
 }: MultiSelectProps) {
 	return (
-		<Listbox value={value} onChange={onChange} multiple as='div' className={twMerge(className, "relative")}>
+		<Listbox value={value} onChange={onChange} multiple as='div' className={twMerge(className, "relative")} name={name}>
 			<Listbox.Label
 				id='multi-select-label'
 				className='mb-1 block w-max text-sm font-semibold text-gray-800 prevent-selection'>

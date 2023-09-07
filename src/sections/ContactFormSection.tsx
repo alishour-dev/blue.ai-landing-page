@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useMemo, useState } from "react"
+import { useState } from "react"
 
 import { Button } from "@/comps/Button"
 import { MotionElement } from "@/comps/MotionElement"
@@ -16,53 +16,41 @@ import IonIosSend from "~icons/ion/ios-send"
 export function ContactFormSection() {
 	const [loading, setLoading] = useState(false)
 	const [data, setData] = useState<contactDataType>(initialData)
+	const { name, email, phoneNumber, companyName, role, interestedIn, message } = data
 
 	const { addNotification } = useNotifications()
 
 	// Boolean that returns false if the data needed to be submitted is Invalid
 	// (No name, email, phone number, company name, or message field was/were passed, as well as checking validity of phone number)
-	const isInvalid = useMemo(
-		() =>
-			!data?.name ||
-			!data?.email ||
-			data?.phoneNumber?.replace(/[\s]+/g, "") === "+1" ||
-			!data?.companyName ||
-			!data?.message,
-		// || (!!data?.phoneNumber?.length && !isPossiblePhoneNumber(data?.phoneNumber))
-		[data]
-	)
+	const isInvalid =
+		!name || !email || !phoneNumber?.length || phoneNumber?.replace(/[\s]+/g, "") === "+1" || !companyName || !message
 
-	const updateValue = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const updateValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }))
-	}, [])
+	}
 
-	const handleSubmit = useCallback(
-		(e: React.FormEvent) => {
-			e.preventDefault()
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault()
 
-			if (isInvalid) return
+		console.log("re-rendering!")
 
-			setLoading(true)
+		if (isInvalid) return
 
-			fetch("/api/contact-us", {
-				method: "POST",
-				headers: { Accept: "application/json, text/plain, */*", "Content-Type": "application/json" },
-				body: JSON.stringify(data),
+		setLoading(true)
+
+		fetch("/api/contact-us", { ...apiOptions, body: JSON.stringify(data) })
+			.then((res) => res.json())
+			.then(() => {
+				setLoading(false)
+				setData(initialData)
+				addNotification(successNotification)
 			})
-				.then((res) => res.json())
-				.then(() => {
-					setLoading(false)
-					setData(initialData)
-					addNotification(successNotification)
-				})
-				.catch((err) => {
-					setLoading(false)
-					console.log("Error:", err)
-					addNotification(errorNotification(err?.response?.data))
-				})
-		},
-		[data, isInvalid, addNotification]
-	)
+			.catch((err) => {
+				setLoading(false)
+				console.log("Error:", err)
+				addNotification(errorNotification(err?.response?.data))
+			})
+	}
 
 	return (
 		<MotionElement
@@ -76,7 +64,7 @@ export function ContactFormSection() {
 					label='Full name'
 					placeholder='Enter name'
 					required
-					value={data?.name}
+					value={name}
 					onChange={updateValue}
 					spellCheck={false}
 					className='w-full lg:min-w-[310px]'
@@ -87,14 +75,15 @@ export function ContactFormSection() {
 					label='Email Address'
 					placeholder='Enter email'
 					required
-					value={data?.email}
+					value={email}
 					onChange={updateValue}
 					spellCheck={false}
 					className='w-full lg:min-w-[310px]'
 				/>
 				<PhoneNumberInput
+					name='phoneNumber'
 					required
-					value={data?.phoneNumber}
+					value={phoneNumber}
 					onChange={(phoneNumber: string) => setData((prev) => ({ ...prev, phoneNumber }))}
 					className='w-full lg:min-w-[310px]'
 				/>
@@ -103,7 +92,7 @@ export function ContactFormSection() {
 					label='Company Name'
 					placeholder='Company Name'
 					required
-					value={data?.companyName}
+					value={companyName}
 					onChange={updateValue}
 					className='w-full lg:min-w-[310px]'
 				/>
@@ -111,13 +100,14 @@ export function ContactFormSection() {
 					name='role'
 					label='Role'
 					placeholder='Enter your role'
-					value={data?.role}
+					value={role}
 					onChange={updateValue}
 					className='w-full lg:min-w-[310px]'
 				/>
 				<MultiSelect
-					value={data?.interestedIn}
+					value={interestedIn}
 					onChange={(interestedIn) => setData((prev) => ({ ...prev, interestedIn }))}
+					name='interestedIn'
 					label='Interested In'
 					options={interestedInOptions}
 					placeholder='Select product(s) of your interest'
@@ -129,7 +119,7 @@ export function ContactFormSection() {
 				name='message'
 				label='Your message'
 				placeholder='Please include all relevant information'
-				value={data?.message}
+				value={message}
 				onChange={updateValue}
 				required
 			/>
@@ -168,7 +158,7 @@ const initialData: contactDataType = {
 	message: "",
 }
 
-export const interestedInOptions = [
+const interestedInOptions = [
 	"Unified Platform",
 	"Campaign Management System",
 	"Flow Builder",
@@ -182,6 +172,11 @@ export const interestedInOptions = [
 	"Ticketing System",
 	"Billing System",
 ]
+
+const apiOptions: RequestInit = {
+	method: "POST",
+	headers: { Accept: "application/json, text/plain, */*", "Content-Type": "application/json" },
+}
 
 const successNotification: NotificationWithoutIdType = {
 	title: "Successful Delivery",

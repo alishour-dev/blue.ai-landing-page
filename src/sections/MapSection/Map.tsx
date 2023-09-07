@@ -18,7 +18,7 @@ export const Map = memo(({ hoveredPin, setHoveredPin, locations }: MapProps) => 
 	return (
 		<MotionElement
 			as='svg'
-			className='h-auto w-full max-w-full !overflow-visible xs:max-w-[90%] sm:max-w-[80%] md:max-w-[50%]'
+			className='h-auto w-[643px] max-w-full !overflow-visible xs:max-w-[90%] sm:max-w-[80%] md:max-w-[50%]'
 			xmlns='http://www.w3.org/2000/svg'
 			width='643'
 			height='497'

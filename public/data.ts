@@ -411,7 +411,7 @@ export const globalData: GlobalDataProps = {
 				color: "#5bbad5",
 			},
 		],
-		manifest: "./site.webmanifest",
+		// manifest: "./site.webmanifest",
 		other: {
 			"msapplication-TileColor": "#da532c",
 		},

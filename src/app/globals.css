@@ -73,11 +73,7 @@
 
 	/* Glass Element Styles, used in Header */
 	.glass {
-		@apply relative z-10;
-
-		&::before {
-			@apply absolute left-0 top-0 z-[-1] h-full w-full animate-blur-in bg-[rgba(240,240,240,0.5)] content-[""];
-		}
+		@apply z-50 border border-white border-opacity-20 bg-[rgb(240,240,240)] bg-opacity-50 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem];
 	}
 
 	.animated-underline {

@@ -18,7 +18,7 @@ export function CountrySelect({ country, onChange }: CountrySelectProps) {
 			<div className='left-[1px] w-max'>
 				<Listbox.Button
 					id='country-button'
-					className={({ open }: { open: boolean }) =>
+					className={({ open }) =>
 						twMerge(
 							"transition-custom flex h-full w-max cursor-pointer items-center justify-between gap-2 rounded-md rounded-r-none border-0 px-2 text-gray-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400",
 							open && "ring-2 ring-primary [&>svg]:rotate-180"
@@ -43,7 +43,7 @@ export function CountrySelect({ country, onChange }: CountrySelectProps) {
 								<Listbox.Option
 									key={country.iso2}
 									value={country.iso2}
-									className={({ active, selected }: Record<"active" | "selected", boolean>) =>
+									className={({ active, selected }) =>
 										twMerge(
 											"transition-custom relative flex cursor-pointer select-none items-center gap-2 p-3",
 											selected && "font-bold",

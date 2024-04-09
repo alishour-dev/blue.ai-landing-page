@@ -38,7 +38,7 @@ export function MobileView({ mainMenu, cta }: NavbarProps) {
 					/>
 					<div
 						aria-hidden='true'
-						className={twMerge(topBottomBars, mobileMenuOpen && mobileMenuOpen && "-rotate-[42deg] scale-x-[1.2]")}
+						className={twMerge(topBottomBars, mobileMenuOpen && "-rotate-[42deg] scale-x-[1.2]")}
 					/>
 				</div>
 			</button>

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import nodemailer from "nodemailer"
-import Mail from "nodemailer/lib/mailer"
+import nodemailer, { type SendMailOptions } from "nodemailer"
 import type { ZodError } from "zod"
 
 import { ContactSchema } from "@/lib/zod/schema"
@@ -45,7 +44,7 @@ export async function POST(req: Request) {
 	// and management email to SMTP server only if not send management email to Blue.Ai Management
 	const isTestingEmail = chechkIfTestingEmail({ name, email })
 
-	const emailsToBeSent: Mail<any>["options"][] = [
+	const emailsToBeSent: SendMailOptions[] = [
 		{
 			from: BLUE_SMTP_AUTH,
 			to: isTestingEmail ? process.env.BLUE_ADMIN : email,

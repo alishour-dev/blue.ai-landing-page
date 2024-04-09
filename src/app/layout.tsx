@@ -15,8 +15,8 @@ export const metadata: Metadata = globalData.defaultMetaData
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang='en'>
-			<body className={lato.className}>
+		<html lang='en' suppressHydrationWarning>
+			<body className={lato.className} suppressHydrationWarning>
 				<AppLayout headerData={globalData?.headerData} footerData={globalData?.footerData}>
 					{children}
 				</AppLayout>

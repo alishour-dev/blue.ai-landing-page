@@ -33,7 +33,7 @@ export function TypingTitle<T extends keyof JSX.IntrinsicElements>({
 						<m.span key={newId()} {...slideUp} className='text-inherit'>
 							{char}
 						</m.span>
-				  ))
+					))
 				: children
 						?.filter((item) => typeof item === "string")
 						?.map((line) => (

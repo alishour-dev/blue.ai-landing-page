@@ -20,14 +20,14 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 type ElementProps<T extends ButtonType> = T extends "button"
 	? BtnProps & { as?: "button" }
 	: T extends "MotionButton"
-	? BtnProps & MotionProps & { as?: "MotionButton" }
-	: T extends "a"
-	? AnchorProps & { as?: "a"; href: string }
-	: T extends "Link"
-	? LinkProps & AnchorProps & { as?: "Link" }
-	: T extends "MotionLink"
-	? MotionLinkProps & { as?: "MotionLink" }
-	: never
+		? BtnProps & MotionProps & { as?: "MotionButton" }
+		: T extends "a"
+			? AnchorProps & { as?: "a"; href: string }
+			: T extends "Link"
+				? LinkProps & AnchorProps & { as?: "Link" }
+				: T extends "MotionLink"
+					? MotionLinkProps & { as?: "MotionLink" }
+					: never
 
 export type ButtonProps<T extends ButtonType> = {
 	size?: Size
@@ -53,12 +53,12 @@ export function Button<T extends ButtonType>({
 			as === "a"
 				? "a"
 				: as === "Link"
-				? Link
-				: as === "MotionLink"
-				? m(Link)
-				: as === "MotionButton"
-				? m.button
-				: "button",
+					? Link
+					: as === "MotionLink"
+						? m(Link)
+						: as === "MotionButton"
+							? m.button
+							: "button",
 		[as]
 	)
 
